@@ -1,1064 +1,604 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nour Gad - DevOps & Telecom Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #475569;
-            --secondary: #334155;
-            --accent: #64748b;
-            --text: #1e293b;
-            --light: #f8fafc;
-            --white: #ffffff;
-            --gray: #94a3b8;
-            --success: #059669;
-            --warning: #d97706;
-            --subtle-blue: #e2e8f0;
-            --hover: #f1f5f9;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background: var(--light);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--subtle-blue);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Page System */
-        .page {
-            display: none;
-            min-height: 100vh;
-            padding-top: 80px;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            color: white;
-            padding: 6rem 0;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        .hero .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-skills {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .skill-tag {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .contact-info {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: white;
-            text-decoration: none;
-            opacity: 0.9;
-        }
-
-        .contact-item:hover {
-            opacity: 1;
-        }
-
-        /* Content Sections */
-        .section {
-            padding: 4rem 0;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--secondary);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        .about-stats {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--subtle-blue);
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--hover);
-        }
-
-        .stat-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        /* Education Section */
-        .education {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--subtle-blue);
-            margin-top: 2rem;
-        }
-
-        .education h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .education-item {
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        /* Tech Stack */
-        .tech-stack {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .tech-category {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--subtle-blue);
-        }
-
-        .tech-category h4 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .tech-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tech-item {
-            background: var(--hover);
-            border: 1px solid var(--subtle-blue);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            color: var(--text);
-        }
-
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--subtle-blue);
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .project-header {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            padding: 1.5rem;
-        }
-
-        .project-header h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        .project-location {
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-
-        .project-body {
-            padding: 1.5rem;
-        }
-
-        .project-tech {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .tech-badge {
-            background: var(--primary);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.75rem;
-        }
-
-        /* Achievements Section */
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .achievement-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid var(--success);
-            transition: all 0.3s ease;
-        }
-
-        .achievement-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .achievement-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--success);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .achievement-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Certificates */
-        .certs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .cert-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid var(--success);
-            transition: all 0.3s ease;
-        }
-
-        .cert-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .cert-card.in-progress {
-            border-left-color: var(--warning);
-        }
-
-        .cert-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .cert-status {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin-top: 1rem;
-        }
-
-        .cert-status.completed {
-            background: rgba(5, 150, 105, 0.1);
-            color: var(--success);
-        }
-
-        .cert-status.progress {
-            background: rgba(217, 119, 6, 0.1);
-            color: var(--warning);
-        }
-
-        /* Contact Form */
-        .contact-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--subtle-blue);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-form h3 {
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--subtle-blue);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .submit-btn {
-            background: var(--primary);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-        }
-
-        /* Contact Info on Contact Page */
-        .contact-page-info {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            padding: 2rem;
-            border-radius: 12px;
-            max-width: 600px;
-            margin: 2rem auto;
-        }
-
-        /* Download Button */
-        .download-btn {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--primary);
-            color: white;
-            padding: 1rem;
-            border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .download-btn:hover {
-            transform: scale(1.1);
-            background: var(--secondary);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 0.5rem;
-            }
-
-            .nav-links a {
-                padding: 0.3rem 0.6rem;
-                font-size: 0.9rem;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-info, .contact-page-info {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .tech-stack {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form {
-                padding: 1.5rem;
-            }
-        }
-
-        @media print {
-            nav, .download-btn {
-                display: none;
-            }
-            
-            .page {
-                display: block !important;
-                page-break-after: always;
-            }
-            
-            .page:last-child {
-                page-break-after: avoid;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nour Gad - DevOps &amp; Telecom Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#0A1128;
+    --navy-900:#0F1A38;
+    --navy-800:#182449;
+    --navy-700:#25335E;
+    --amber:#F2A64B;
+    --amber-soft:#F7C384;
+    --teal:#3FA9A0;
+    --slate-50:#F6F7FB;
+    --slate-100:#ECEFF5;
+    --slate-300:#C7CCDA;
+    --ink:#171B26;
+    --ink-soft:#4A5164;
+    --line:#DCE1EC;
+    --line-dark:#2B3868;
+    --max:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--slate-50);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--amber-soft);
+  }
+  .eyebrow.dark{color:var(--amber-soft);}
+  .eyebrow.light{color:#B9772E;}
+  a{color:inherit;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+  @media(max-width:640px){.wrap{padding:0 20px;}}
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,17,40,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-dark);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .brand{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.05rem;color:#fff;letter-spacing:-0.01em;}
+  .brand span{color:var(--amber);}
+  .navlinks{display:flex;gap:28px;list-style:none;}
+  .navlinks a{
+    color:var(--slate-300);font-size:0.88rem;text-decoration:none;font-weight:500;
+    transition:color .2s;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--amber-soft);}
+  @media(max-width:640px){.navlinks{display:none;}}
+
+  /* ===== HERO ===== */
+  .hero{
+    background:radial-gradient(ellipse 900px 500px at 70% -10%, #16214a 0%, var(--navy-950) 60%);
+    color:#fff;
+    padding:72px 0 56px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--line-dark);
+  }
+  .hero .wrap{display:grid;grid-template-columns:1.05fr 0.95fr;gap:40px;align-items:center;}
+  @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(2.1rem,4vw,3.1rem);font-weight:700;line-height:1.08;margin:14px 0 12px;}
+  .hero .title-line{font-family:'IBM Plex Mono',monospace;font-size:0.98rem;color:var(--teal);margin-bottom:18px;}
+  .hero p.lede{color:var(--slate-300);font-size:1.02rem;max-width:520px;margin-bottom:26px;}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:30px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 20px;border-radius:3px;
+    font-size:0.88rem;font-weight:600;text-decoration:none;
+    border:1px solid transparent;
+    transition:transform .15s, background .2s, border-color .2s;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--amber);color:var(--navy-950);}
+  .btn-primary:hover{background:var(--amber-soft);}
+  .btn-ghost{border-color:var(--line-dark);color:var(--slate-300);}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+  .tagpills{display:flex;flex-wrap:wrap;gap:8px;}
+  .pill{
+    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;
+    padding:5px 10px;border:1px solid var(--line-dark);border-radius:2px;
+    color:var(--slate-300);
+  }
+
+  /* network svg */
+  .netviz{width:100%;height:auto;}
+  .netviz .node-dot{fill:var(--amber);}
+  .netviz .hub-dot{fill:var(--teal);}
+  .netviz text{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:var(--slate-300);}
+  .netviz .hub-label{fill:var(--teal);font-weight:600;}
+  .netviz .lane{stroke:var(--line-dark);stroke-width:1;fill:none;}
+  .netviz .pulse{stroke:var(--amber);stroke-width:1.4;fill:none;stroke-dasharray:4 8;animation:dash 3.5s linear infinite;opacity:0.8;}
+  @keyframes dash{to{stroke-dashoffset:-120;}}
+  @media (prefers-reduced-motion: reduce){.netviz .pulse{animation:none;}}
+
+  /* ===== SECTION helpers ===== */
+  section{padding:64px 0;}
+  .section-head{margin-bottom:32px;}
+  .section-head h2{font-size:1.7rem;color:var(--ink);margin-top:6px;}
+  .section-head .eyebrow{color:#B9772E;}
+
+  /* ===== ABOUT ===== */
+  .about{background:var(--slate-50);}
+  .stat-row{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+    margin-bottom:40px;
+  }
+  @media(max-width:700px){.stat-row{grid-template-columns:repeat(2,1fr);}}
+  .stat{background:#fff;padding:22px 20px;}
+  .stat .num{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:var(--navy-900);}
+  .stat .label{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px;}
+  .about-grid{display:grid;grid-template-columns:1.3fr 0.9fr;gap:48px;}
+  @media(max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  .about-text p{color:var(--ink-soft);margin-bottom:14px;font-size:0.98rem;}
+  .about-text strong{color:var(--ink);}
+  .country-panel{background:var(--navy-950);border-radius:4px;padding:22px 22px 20px;color:#fff;}
+  .country-panel .eyebrow{margin-bottom:10px;display:block;}
+  .country-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+  .country-chip{
+    font-family:'IBM Plex Mono',monospace;font-size:0.76rem;
+    background:var(--navy-800);border:1px solid var(--line-dark);
+    padding:5px 9px;border-radius:2px;color:var(--slate-300);
+  }
+  .country-chip.remote{border-color:var(--teal);color:var(--teal);}
+  .legend{display:flex;gap:16px;margin-top:14px;font-size:0.72rem;color:var(--slate-300);font-family:'IBM Plex Mono',monospace;}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .dot.onsite{background:var(--amber);}
+  .dot.remote{background:var(--teal);}
+  .edu{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);}
+  .edu .eyebrow{color:#B9772E;margin-bottom:6px;display:block;}
+
+  /* ===== COMPETENCIES ===== */
+  .comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media(max-width:900px){.comp-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.comp-grid{grid-template-columns:1fr;}}
+  .comp-card{background:#fff;padding:24px 22px;}
+  .comp-card h3{font-size:1.02rem;margin-bottom:4px;}
+  .comp-card .note{font-size:0.78rem;color:var(--teal);font-family:'IBM Plex Mono',monospace;margin-bottom:12px;display:block;}
+  .comp-card .tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .tag{font-size:0.78rem;background:var(--slate-100);border:1px solid var(--line);padding:4px 9px;border-radius:2px;color:var(--ink-soft);}
+  .comp-card.highlight{background:#FFF7EC;}
+
+  /* ===== PROJECTS ===== */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  @media(max-width:800px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card{
+    background:#fff;border:1px solid var(--line);border-radius:4px;padding:24px;
+    border-top:3px solid var(--navy-900);
+    transition:box-shadow .2s, transform .2s;
+  }
+  .proj-card:hover{box-shadow:0 8px 24px rgba(15,26,56,0.08);transform:translateY(-2px);}
+  .proj-card.feature{border-top-color:var(--amber);background:linear-gradient(180deg,#FFF9F0 0%,#fff 40%);}
+  .proj-card .eyebrow{margin-bottom:8px;display:block;}
+  .proj-card h3{font-size:1.08rem;margin-bottom:8px;}
+  .proj-card p{color:var(--ink-soft);font-size:0.92rem;margin-bottom:14px;}
+  .proj-card .tags{display:flex;flex-wrap:wrap;gap:6px;}
+
+  /* ===== ACHIEVEMENTS ===== */
+  .ach-band{background:var(--navy-950);color:#fff;}
+  .ach-band .section-head .eyebrow{color:var(--amber-soft);}
+  .ach-band .section-head h2{color:#fff;}
+  .ach-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-dark);}
+  @media(max-width:900px){.ach-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.ach-grid{grid-template-columns:1fr;}}
+  .ach-card{background:var(--navy-900);padding:22px 20px;}
+  .ach-card .ic{font-size:1.4rem;margin-bottom:10px;display:block;}
+  .ach-card h4{font-size:0.95rem;color:#fff;margin-bottom:8px;}
+  .ach-card p{font-size:0.82rem;color:var(--slate-300);}
+
+  /* ===== CERTS ===== */
+  .cert-list{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:4px;overflow:hidden;}
+  .cert-row{
+    display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;
+    padding:18px 22px;border-bottom:1px solid var(--line);background:#fff;
+  }
+  .cert-row:last-child{border-bottom:none;}
+  .cert-row h4{font-size:0.96rem;margin-bottom:3px;}
+  .cert-row p{font-size:0.82rem;color:var(--ink-soft);}
+  .status{
+    font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;
+    padding:5px 10px;border-radius:2px;white-space:nowrap;
+  }
+  .status.done{background:#E4F5F0;color:#1E7460;}
+  .status.progress{background:#FDF0DE;color:#B9772E;}
+
+  /* ===== CONTACT ===== */
+  .contact{background:var(--navy-950);color:#fff;}
+  .contact .section-head .eyebrow{color:var(--amber-soft);}
+  .contact .section-head h2{color:#fff;}
+  .contact-grid{display:flex;flex-wrap:wrap;gap:14px;}
+  .contact-card{
+    flex:1;min-width:220px;
+    background:var(--navy-900);border:1px solid var(--line-dark);border-radius:4px;
+    padding:20px;text-decoration:none;color:#fff;transition:border-color .2s;
+  }
+  .contact-card:hover{border-color:var(--amber);}
+  .contact-card .eyebrow{color:var(--teal);margin-bottom:6px;display:block;}
+  .contact-card .val{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;}
+
+  footer{background:var(--navy-950);border-top:1px solid var(--line-dark);color:var(--slate-300);padding:22px 0;font-size:0.82rem;text-align:center;}
+</style>
 </head>
 <body>
-    <!-- Download Button -->
-    <button class="download-btn" onclick="downloadHTML()" title="Download Portfolio">⬇</button>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <div class="nav-container">
-                <div class="logo">Nour Gad</div>
-                <ul class="nav-links">
-                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
-                    <li><a href="#" class="nav-link" data-page="about">About</a></li>
-                    <li><a href="#" class="nav-link" data-page="projects">Projects</a></li>
-                    <li><a href="#" class="nav-link" data-page="achievements">Achievements</a></li>
-                    <li><a href="#" class="nav-link" data-page="certificates">Certificates</a></li>
-                    <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
-                </ul>
-            </div>
+<nav>
+  <div class="wrap">
+    <div class="brand">Nour Gad<span>.</span></div>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#training">Training</a></li>
+      <li><a href="#certs">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow dark">PMP® · DEVOPS &amp; TELECOM ENGINEER</span>
+      <h1>Nour Gad</h1>
+      <div class="title-line">DevOps &amp; Telecom Engineer — RAN Delivery, Cloud &amp; Field Training</div>
+      <p class="lede">10+ years leading network rollout, integration, and technical training programs across the Middle East &amp; Africa — now building cloud and automation skills to bridge telecom operations with DevOps practice.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="mailto:nour0gad@gmail.com">Email Me</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/in/nour-gad" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/nourGAD" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="tagpills">
+        <span class="pill">RAN INTEGRATION</span>
+        <span class="pill">MULTI-COUNTRY DELIVERY</span>
+        <span class="pill">TECHNICAL TRAINING</span>
+        <span class="pill">CLOUD &amp; DEVOPS (LAB)</span>
+      </div>
+    </div>
+    <div>
+      <svg class="netviz" viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coverage network across MEA region">
+        <circle cx="230" cy="190" r="7" class="hub-dot"/>
+        <text x="230" y="176" text-anchor="middle" class="hub-label">CAIRO · HUB</text>
+
+        <path class="lane" d="M230,190 C170,120 120,90 90,60"/>
+        <path class="pulse" d="M230,190 C170,120 120,90 90,60"/>
+        <circle cx="90" cy="60" r="4" class="node-dot"/><text x="98" y="58">EGYPT</text>
+
+        <path class="lane" d="M230,190 C280,140 330,100 360,70"/>
+        <path class="pulse" d="M230,190 C280,140 330,100 360,70"/>
+        <circle cx="360" cy="70" r="4" class="node-dot"/><text x="322" y="58">KSA</text>
+
+        <path class="lane" d="M230,190 C300,170 360,150 410,140"/>
+        <path class="pulse" d="M230,190 C300,170 360,150 410,140"/>
+        <circle cx="410" cy="140" r="4" class="node-dot"/><text x="365" y="130">UAE</text>
+
+        <path class="lane" d="M230,190 C260,150 280,110 300,80"/>
+        <path class="pulse" d="M230,190 C260,150 280,110 300,80"/>
+        <circle cx="300" cy="80" r="4" class="node-dot"/><text x="264" y="70">JORDAN</text>
+
+        <path class="lane" d="M230,190 C220,150 210,120 205,90"/>
+        <path class="pulse" d="M230,190 C220,150 210,120 205,90"/>
+        <circle cx="205" cy="90" r="4" class="node-dot"/><text x="150" y="86">PALESTINE</text>
+
+        <path class="lane" d="M230,190 C240,230 250,270 260,300"/>
+        <path class="pulse" d="M230,190 C240,230 250,270 260,300"/>
+        <circle cx="260" cy="300" r="4" class="node-dot"/><text x="270" y="304">TÜRKİYE</text>
+
+        <path class="lane" d="M230,190 C180,230 130,260 100,300"/>
+        <path class="pulse" d="M230,190 C180,230 130,260 100,300" style="stroke:#3FA9A0;"/>
+        <circle cx="100" cy="300" r="4" style="fill:#3FA9A0;"/><text x="58" y="298">S. AFRICA</text>
+
+        <path class="lane" d="M230,190 C200,240 160,280 130,330"/>
+        <path class="pulse" d="M230,190 C200,240 160,280 130,330" style="stroke:#3FA9A0;"/>
+        <circle cx="130" cy="330" r="4" style="fill:#3FA9A0;"/><text x="90" y="348">ANGOLA</text>
+
+        <path class="lane" d="M230,190 C290,220 340,250 370,290"/>
+        <path class="pulse" d="M230,190 C290,220 340,250 370,290" style="stroke:#3FA9A0;"/>
+        <circle cx="370" cy="290" r="4" style="fill:#3FA9A0;"/><text x="330" y="308">OMAN</text>
+
+        <path class="lane" d="M230,190 C310,210 380,230 420,250"/>
+        <path class="pulse" d="M230,190 C310,210 380,230 420,250" style="stroke:#3FA9A0;"/>
+        <circle cx="420" cy="250" r="4" style="fill:#3FA9A0;"/><text x="380" y="268">ZAMBIA</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">01 — ABOUT</span>
+      <h2>Field-tested across ten countries, now building toward cloud &amp; automation</h2>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat"><div class="num">10+</div><div class="label">Years Experience</div></div>
+      <div class="stat"><div class="num">10</div><div class="label">Countries Delivered</div></div>
+      <div class="stat"><div class="num">80+</div><div class="label">Engineers Trained</div></div>
+      <div class="stat"><div class="num">PMP®</div><div class="label">Certified PM</div></div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Results-driven <strong>RAN &amp; Cloud Engineer / Senior Telecom Project Manager</strong> with 10+ years across telecom network deployment, field operations, and technical training delivery — most recently focused on Ericsson RAN rollout and the <strong>Jawwal</strong> account in Palestine.</p>
+        <p>My work sits at the intersection of hands-on field engineering and program delivery: leading multi-team rollouts, resolving integration and commissioning issues, and translating technical detail into training that field engineers can act on — often delivered bilingually in Arabic and English, on-site and remote.</p>
+        <p>I'm actively building cloud and automation depth — Docker, Kubernetes, Ansible, Terraform, and Google Cloud — through structured lab programs, as I work toward roles that bridge telecom operations with DevOps practice.</p>
+        <div class="edu">
+          <span class="eyebrow">EDUCATION</span>
+          Bachelor of Engineering — Electronics &amp; Communications
         </div>
-    </nav>
+      </div>
 
-    <!-- Home Page -->
-    <div class="page active" id="home">
-        <section class="hero">
-            <div class="container">
-                <h1>Nour Gad</h1>
-                <p class="subtitle">PMP® Certified | DevOps & Telecom Engineer</p>
-                <p>Highly adaptable engineer with expertise in telecommunications network deployment, DevOps automation, and cloud infrastructure. Passionate about bridging operational efficiency and development agility.</p>
-                
-                <div class="hero-skills">
-                    <span class="skill-tag">DevOps & CI/CD</span>
-                    <span class="skill-tag">Docker & Kubernetes</span>
-                    <span class="skill-tag">AWS & OpenStack</span>
-                    <span class="skill-tag">5G Networks</span>
-                    <span class="skill-tag">Ansible Automation</span>
-                    <span class="skill-tag">Linux Systems</span>
-                </div>
-
-                <div class="contact-info">
-                    <a href="mailto:nour0gad@gmail.com" class="contact-item">
-                        📧 nour0gad@gmail.com
-                    </a>
-                    <a href="tel:+201040056434" class="contact-item">
-                        📱 +20 01040056434
-                    </a>
-                    <a href="https://linkedin.com/in/nour-gad" target="_blank" class="contact-item">
-                        💼 LinkedIn
-                    </a>
-                    <a href="https://github.com/nourGAD" target="_blank" class="contact-item">
-                        🔗 GitHub
-                    </a>
-                </div>
-            </div>
-        </section>
+      <div class="country-panel">
+        <span class="eyebrow dark">COVERAGE</span>
+        <div class="country-list">
+          <span class="country-chip">EGYPT</span>
+          <span class="country-chip">KSA</span>
+          <span class="country-chip">UAE</span>
+          <span class="country-chip">JORDAN</span>
+          <span class="country-chip">PALESTINE</span>
+          <span class="country-chip">TÜRKİYE</span>
+          <span class="country-chip remote">SOUTH AFRICA</span>
+          <span class="country-chip remote">ANGOLA</span>
+          <span class="country-chip remote">OMAN</span>
+          <span class="country-chip remote">ZAMBIA</span>
+        </div>
+        <div class="legend">
+          <span><span class="dot onsite"></span>On-site delivery</span>
+          <span><span class="dot remote"></span>Remote support &amp; training</span>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- About Page -->
-    <div class="page" id="about">
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                
-                <div class="about-content">
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <span>Countries Worked</span>
-                            <strong>8 Countries</strong>
-                        </div>
-                        <div class="stat-item">
-                            <span>Specialization</span>
-                            <strong>DevOps & Telecom</strong>
-                        </div>
-                        <div class="stat-item">
-                            <span>Certification</span>
-                            <strong>PMP® Certified</strong>
-                        </div>
-                        <div class="stat-item">
-                            <span>Focus Areas</span>
-                            <strong>Cloud & Automation</strong>
-                        </div>
-                    </div>
-                    
-                    <div class="about-text">
-                        <p>Results-driven DevOps & Telecom Engineer with extensive experience in telecom and IT infrastructure, combining strong automation, cloud, and DevOps expertise with a solid foundation in mobile network deployment and optimization.</p>
-                        
-                        <p>I specialize in bridging operations and development to deliver efficient, scalable, and secure systems. My experience spans across multiple countries including Egypt, KSA, UAE, Angola, South Africa, Oman, Jordan, and Zambia, working with leading telecom vendors like Ericsson, Huawei, and Nokia.</p>
-                        
-                        <p>My passion lies in implementing DevOps principles to telecom infrastructure, improving delivery speed while ensuring quality, safety, and compliance standards. I excel in mentoring diverse teams and implementing new technologies to improve operational efficiency.</p>
-                    </div>
-                </div>
-
-                <div class="education">
-                    <h4>Education</h4>
-                    <div class="education-item">
-                        <strong>Bachelor of Engineering: Electronics and Communications</strong>
-                    </div>
-                </div>
-
-                <h3 style="margin: 3rem 0 2rem; color: var(--secondary); font-size: 2rem; text-align: center;">Core Competencies</h3>
-                
-                <div class="tech-stack">
-                    <div class="tech-category">
-                        <h4>DevOps & Automation</h4>
-                        <div class="tech-items">
-                            <span class="tech-item">CI/CD Pipelines</span>
-                            <span class="tech-item">Infrastructure as Code</span>
-                            <span class="tech-item">Configuration Management</span>
-                            <span class="tech-item">Ansible</span>
-                            <span class="tech-item">Shell Scripting</span>
-                        </div>
-                    </div>
-                    
-                    <div class="tech-category">
-                        <h4>Containerization & Orchestration</h4>
-                        <div class="tech-items">
-                            <span class="tech-item">Docker</span>
-                            <span class="tech-item">Kubernetes (K8s)</span>
-                            <span class="tech-item">Container Security</span>
-                            <span class="tech-item">Microservices</span>
-                        </div>
-                    </div>
-                    
-                    <div class="tech-category">
-                        <h4>Cloud & Virtualization</h4>
-                        <div class="tech-items">
-                            <span class="tech-item">AWS EC2</span>
-                            <span class="tech-item">AWS S3</span>
-                            <span class="tech-item">AWS VPC</span>
-                            <span class="tech-item">OpenStack</span>
-                            <span class="tech-item">VM Management</span>
-                            <span class="tech-item">Cloud Architecture</span>
-                        </div>
-                    </div>
-                    
-                    <div class="tech-category">
-                        <h4>Telecom Networks</h4>
-                        <div class="tech-items">
-                            <span class="tech-item">2G/3G/4G/5G RAN</span>
-                            <span class="tech-item">Transmission</span>
-                            <span class="tech-item">Ericsson</span>
-                            <span class="tech-item">Huawei</span>
-                            <span class="tech-item">Nokia</span>
-                        </div>
-                    </div>
-                    
-                    <div class="tech-category">
-                        <h4>Management & Analytics</h4>
-                        <div class="tech-items">
-                            <span class="tech-item">Linux Administration</span>
-                            <span class="tech-item">Project Management</span>
-                            <span class="tech-item">Power BI</span>
-                            <span class="tech-item">MS Excel Advanced</span>
-                            <span class="tech-item">Team Leadership</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">02 — CORE COMPETENCIES</span>
+      <h2>Skills across network delivery, cloud, and enablement</h2>
     </div>
-
-    <!-- Projects Page -->
-    <div class="page" id="projects">
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">Selected Projects</h2>
-                
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-header">
-                            <h3>5G New Sites Deployment</h3>
-                            <p class="project-location">KSA - STC</p>
-                        </div>
-                        <div class="project-body">
-                            <p>Led 14 teams to install and commission 5G-ready equipment, ensuring seamless deployment of next-generation telecom infrastructure with safety and quality compliance.</p>
-                            <div class="project-tech">
-                                <span class="tech-badge">5G RAN</span>
-                                <span class="tech-badge">Team Leadership</span>
-                                <span class="tech-badge">Installation</span>
-                                <span class="tech-badge">Commissioning</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-header">
-                            <h3>MTN Technical Support</h3>
-                            <p class="project-location">South Africa - MTN</p>
-                        </div>
-                        <div class="project-body">
-                            <p>Provided technical support and mentoring for installation and configuration while organizing team tasks to ensure smooth implementation.</p>
-                            <div class="project-tech">
-                                <span class="tech-badge">Technical Support</span>
-                                <span class="tech-badge">Team Management</span>
-                                <span class="tech-badge">Configuration</span>
-                                <span class="tech-badge">Mentoring</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-header">
-                            <h3>PAT Technical Documentation</h3>
-                            <p class="project-location">Jordan - Umnia</p>
-                        </div>
-                        <div class="project-body">
-                            <p>Handled PAT Technical document submission and clearance for E2E project delivery, reducing customer complaints by resolving PAT issues efficiently.</p>
-                            <div class="project-tech">
-                                <span class="tech-badge">PAT Process</span>
-                                <span class="tech-badge">Documentation</span>
-                                <span class="tech-badge">E2E Delivery</span>
-                                <span class="tech-badge">Quality Assurance</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-header">
-                            <h3>DU Project Management</h3>
-                            <p class="project-location">UAE - DU</p>
-                        </div>
-                        <div class="project-body">
-                            <p>Currently managing teams to reach project objectives, generating analytical reports and administering team HSE certificates.</p>
-                            <div class="project-tech">
-                                <span class="tech-badge">Project Management</span>
-                                <span class="tech-badge">Analytics</span>
-                                <span class="tech-badge">HSE Compliance</span>
-                                <span class="tech-badge">Team Leadership</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-header">
-                            <h3>Unitel Angola Operations</h3>
-                            <p class="project-location">Angola - Unitel</p>
-                        </div>
-                        <div class="project-body">
-                            <p>Supported and followed up with 3 ASPs managing more than 10 implementation teams, including drone operations for inspection and data collection.</p>
-                            <div class="project-tech">
-                                <span class="tech-badge">ASP Management</span>
-                                <span class="tech-badge">Drone Operations</span>
-                                <span class="tech-badge">Data Collection</span>
-                                <span class="tech-badge">Multi-team Coordination</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-header">
-                            <h3>OpenStack Environment Setup</h3>
-                            <p class="project-location">Cloud Infrastructure</p>
-                        </div>
-                        <div class="project-body">
-                            <p>Prepared VM hosting environment for packet core systems in telecom project, implementing cloud-native infrastructure with automation.</p>
-                            <div class="project-tech">
-                                <span class="tech-badge">OpenStack</span>
-                                <span class="tech-badge">VM Management</span>
-                                <span class="tech-badge">Packet Core</span>
-                                <span class="tech-badge">Cloud Infrastructure</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <h3>RAN &amp; Telecom Networks</h3>
+        <div class="tags">
+          <span class="tag">2G/3G/4G/5G RAN</span><span class="tag">Ericsson Baseband</span>
+          <span class="tag">Integration &amp; Commissioning</span><span class="tag">Transmission</span>
+          <span class="tag">MoShell / LMT / ZT</span><span class="tag">Huawei</span><span class="tag">Nokia</span>
+        </div>
+      </div>
+      <div class="comp-card highlight">
+        <h3>Cloud &amp; DevOps</h3>
+        <span class="note">Hands-on lab experience (NTI Egypt program &amp; Google Cloud Cohort)</span>
+        <div class="tags">
+          <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Jenkins</span>
+          <span class="tag">Ansible</span><span class="tag">Terraform</span><span class="tag">OpenStack</span>
+          <span class="tag">Google Cloud Platform</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <h3>Project &amp; Program Management</h3>
+        <div class="tags">
+          <span class="tag">PMP® Methodology</span><span class="tag">Multi-country Delivery</span>
+          <span class="tag">Subcontractor Coordination</span><span class="tag">Stakeholder Comms</span>
+          <span class="tag">HSE Compliance</span><span class="tag">Risk &amp; Reporting</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <h3>Training &amp; Enablement</h3>
+        <div class="tags">
+          <span class="tag">Technical Training Delivery</span><span class="tag">Remote Facilitation</span>
+          <span class="tag">Bilingual (AR/EN)</span><span class="tag">SRS Tools</span>
+          <span class="tag">Curriculum Design</span><span class="tag">Field Mentoring</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <h3>Tools &amp; Platforms</h3>
+        <div class="tags">
+          <span class="tag">Linux Administration</span><span class="tag">Power BI</span>
+          <span class="tag">MS Excel (Advanced)</span><span class="tag">Git</span><span class="tag">MOP Planning</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <h3>Team &amp; Field Leadership</h3>
+        <div class="tags">
+          <span class="tag">Cross-cultural Team Leadership</span><span class="tag">ASP Management</span>
+          <span class="tag">FTR / FTP Process</span><span class="tag">Drone-assisted Survey</span>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- Achievements Page -->
-    <div class="page" id="achievements">
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">Key Achievements</h2>
-                
-                <div class="achievements-grid">
-                    <div class="achievement-card">
-                        <div class="achievement-icon">🚀</div>
-                        <div class="achievement-title">FSO Operations Extension</div>
-                        <p>Successfully extended Ericsson FSO operations into new areas based on high performance, leading to expanded responsibilities in RAN and transmission.</p>
-                    </div>
-                    
-                    <div class="achievement-card">
-                        <div class="achievement-icon">⚡</div>
-                        <div class="achievement-title">Project Completion Efficiency</div>
-                        <p>Succeeded in finalizing project in half of allocated time efficiently, demonstrating exceptional project management and team coordination skills.</p>
-                    </div>
-                    
-                    <div class="achievement-card">
-                        <div class="achievement-icon">🎯</div>
-                        <div class="achievement-title">Customer Satisfaction</div>
-                        <p>Reduced customer complaints significantly by resolving PAT (Provisioning Acceptance Test) issues and implementing quality improvement processes.</p>
-                    </div>
-                    
-                    <div class="achievement-card">
-                        <div class="achievement-icon">📡</div>
-                        <div class="achievement-title">First Successful Transmission Trial</div>
-                        <p>Led the first successful transmission trial with E-band and traditional link for Orange, landing a major contract and setting industry standards.</p>
-                    </div>
-                    
-                    <div class="achievement-card">
-                        <div class="achievement-icon">👥</div>
-                        <div class="achievement-title">Team Efficiency Improvement</div>
-                        <p>Increased teams efficiency and readiness for installation with FTR (First Time Right) and FTP (First Time Perfect) by introducing new Ericsson tools.</p>
-                    </div>
-                    
-                    <div class="achievement-card">
-                        <div class="achievement-icon">🌍</div>
-                        <div class="achievement-title">Multi-Cultural Leadership</div>
-                        <p>Successfully mentored and led diverse teams across 8 countries, adapting to different cultural environments while maintaining high performance standards.</p>
-                    </div>
-                    
-                    <div class="achievement-card">
-                        <div class="achievement-icon">🔧</div>
-                        <div class="achievement-title">Process Innovation</div>
-                        <p>Defined and implemented new processes to improve team performance, integrating DevOps principles with traditional telecom operations.</p>
-                    </div>
-                    
-                    <div class="achievement-card">
-                        <div class="achievement-icon">📊</div>
-                        <div class="achievement-title">Data-Driven Operations</div>
-                        <p>Implemented drone operations for inspection and data collection, modernizing traditional survey methods and improving accuracy and safety.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- ================= PROJECTS ================= -->
+<section id="projects" style="background:var(--slate-50);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">03 — SELECTED PROJECTS</span>
+      <h2>Delivery across markets and disciplines</h2>
     </div>
+    <div class="proj-grid">
 
-    <!-- Certificates Page -->
-    <div class="page" id="certificates">
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">Certifications & Training</h2>
-                
-                <div class="certs-grid">
-                    <div class="cert-card">
-                        <div class="cert-title">Project Management Professional (PMP®)</div>
-                        <p>Professional certification in project management methodologies, leadership, and strategic business management.</p>
-                        <span class="cert-status completed">Certified</span>
-                    </div>
-                    
-                    <div class="cert-card">
-                        <div class="cert-title">O.S.H.A 60 Hour Certified</div>
-                        <p>Comprehensive safety certification covering occupational safety and health administration standards for construction and industrial environments.</p>
-                        <span class="cert-status completed">Certified</span>
-                    </div>
-                    
-                    <div class="cert-card">
-                        <div class="cert-title">HCNA – Routing and Switching</div>
-                        <p>Huawei Certified Network Associate certification covering network fundamentals, routing, and switching technologies.</p>
-                        <span class="cert-status completed">Certified</span>
-                    </div>
-                    
-                    <div class="cert-card">
-                        <div class="cert-title">Cloud AI Integration - Linux (LFCS)</div>
-                        <p>Linux Foundation Certified System Administrator with focus on cloud AI integration and advanced system administration.</p>
-                        <span class="cert-status completed">Certified</span>
-                    </div>
-                    
-                    <div class="cert-card in-progress">
-                        <div class="cert-title">Certified Kubernetes Administrator (CKA)</div>
-                        <p>Advanced certification for Kubernetes cluster administration, including installation, configuration, and troubleshooting.</p>
-                        <span class="cert-status progress">In Progress</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <div class="proj-card feature">
+        <span class="eyebrow">PALESTINE — JAWWAL &amp; DURACOM</span>
+        <h3>RAN Technical Training Program</h3>
+        <p>Designed and delivered a 2-month RAN technical training program across 5 batches, training 80 field engineers from Jawwal, Duracom, and subcontractor teams — covering hardware installation, commissioning, MoShell/LMT/ZT, and troubleshooting.</p>
+        <div class="tags"><span class="tag">RAN Training</span><span class="tag">Multi-batch Delivery</span><span class="tag">Field Engineering</span></div>
+      </div>
+
+      <div class="proj-card feature">
+        <span class="eyebrow">PALESTINE — JAWWAL</span>
+        <h3>SRS Rollout Training &amp; Support</h3>
+        <p>Delivering remote training and live technical support for Jawwal's Smart Rollout Support (SRS) tool, resolving site upload validation errors and drafting technical communications between field, NDO, and Ericsson stakeholders.</p>
+        <div class="tags"><span class="tag">Remote Training</span><span class="tag">SRS Tool</span><span class="tag">Stakeholder Comms</span></div>
+      </div>
+
+      <div class="proj-card">
+        <span class="eyebrow">KSA — STC</span>
+        <h3>5G New Sites Deployment</h3>
+        <p>Led 14 teams to install and commission 5G-ready equipment, ensuring seamless deployment of next-generation telecom infrastructure with safety and quality compliance.</p>
+        <div class="tags"><span class="tag">5G RAN</span><span class="tag">Team Leadership</span><span class="tag">Commissioning</span></div>
+      </div>
+
+      <div class="proj-card">
+        <span class="eyebrow">SOUTH AFRICA — MTN</span>
+        <h3>MTN Technical Support</h3>
+        <p>Provided technical support and mentoring for installation and configuration while organizing team tasks to ensure smooth implementation.</p>
+        <div class="tags"><span class="tag">Technical Support</span><span class="tag">Mentoring</span><span class="tag">Configuration</span></div>
+      </div>
+
+      <div class="proj-card">
+        <span class="eyebrow">JORDAN — UMNIA</span>
+        <h3>PAT Technical Documentation</h3>
+        <p>Handled PAT technical document submission and clearance for E2E project delivery, reducing customer complaints by resolving PAT issues efficiently.</p>
+        <div class="tags"><span class="tag">PAT Process</span><span class="tag">Documentation</span><span class="tag">Quality Assurance</span></div>
+      </div>
+
+      <div class="proj-card">
+        <span class="eyebrow">UAE — DU</span>
+        <h3>DU Project Management</h3>
+        <p>Managing teams to reach project objectives, generating analytical reports and administering team HSE certificates.</p>
+        <div class="tags"><span class="tag">Project Management</span><span class="tag">Analytics</span><span class="tag">HSE Compliance</span></div>
+      </div>
+
+      <div class="proj-card">
+        <span class="eyebrow">ANGOLA — UNITEL</span>
+        <h3>Unitel Angola Operations</h3>
+        <p>Supported and followed up with 3 ASPs managing more than 10 implementation teams, including drone operations for inspection and data collection.</p>
+        <div class="tags"><span class="tag">ASP Management</span><span class="tag">Drone Operations</span></div>
+      </div>
+
+      <div class="proj-card">
+        <span class="eyebrow">CLOUD INFRASTRUCTURE</span>
+        <h3>OpenStack Environment Setup</h3>
+        <p>Prepared VM hosting environment for packet core systems in a telecom project, implementing cloud-native infrastructure with automation.</p>
+        <div class="tags"><span class="tag">OpenStack</span><span class="tag">VM Management</span><span class="tag">Packet Core</span></div>
+      </div>
+
     </div>
+  </div>
+</section>
 
-    <!-- Contact Page -->
-    <div class="page" id="contact">
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">Contact Me</h2>
-                <div class="contact-form">
-                    <h3>Send a Message</h3>
-                    <form action="mailto:nour0gad@gmail.com" method="post" enctype="text/plain">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required placeholder="Your Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required placeholder="Subject">
-                        </div>
-                        <div class="form-group">
-                            <label for="body">Message</label>
-                            <textarea id="body" name="body" required placeholder="Your Message"></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Email</button>
-                    </form>
-                </div>
-                <div class="contact-page-info">
-                    <a href="mailto:nour0gad@gmail.com" class="contact-item">
-                        📧 nour0gad@gmail.com
-                    </a>
-                    <a href="tel:+201040056434" class="contact-item">
-                        📱 +20 01040056434
-                    </a>
-                    <a href="https://linkedin.com/in/nour-gad" target="_blank" class="contact-item">
-                        💼 LinkedIn
-                    </a>
-                    <a href="https://github.com/nourGAD" target="_blank" class="contact-item">
-                        🔗 GitHub
-                    </a>
-                </div>
-            </div>
-        </section>
+<!-- ================= TRAINING SPOTLIGHT / ACHIEVEMENTS ================= -->
+<section class="ach-band" id="training">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">04 — KEY ACHIEVEMENTS</span>
+      <h2>Milestones across delivery and training</h2>
     </div>
+    <div class="ach-grid">
+      <div class="ach-card">
+        <span class="ic">🎓</span>
+        <h4>Large-Scale Training Delivery</h4>
+        <p>Trained 80 engineers across 5 batches in a 2-month RAN technical program for Jawwal, Duracom, and subcontractor teams in Palestine.</p>
+      </div>
+      <div class="ach-card">
+        <span class="ic">🚀</span>
+        <h4>FSO Operations Extension</h4>
+        <p>Extended Ericsson FSO operations into new areas based on high performance, expanding responsibilities in RAN and transmission.</p>
+      </div>
+      <div class="ach-card">
+        <span class="ic">⚡</span>
+        <h4>Project Completion Efficiency</h4>
+        <p>Finalized a project in half of allocated time, demonstrating strong project management and team coordination.</p>
+      </div>
+      <div class="ach-card">
+        <span class="ic">🎯</span>
+        <h4>Customer Satisfaction</h4>
+        <p>Reduced customer complaints significantly by resolving PAT issues and implementing quality improvement processes.</p>
+      </div>
+      <div class="ach-card">
+        <span class="ic">📡</span>
+        <h4>First Successful Transmission Trial</h4>
+        <p>Led the first successful transmission trial with E-band and traditional link for Orange, landing a major contract.</p>
+      </div>
+      <div class="ach-card">
+        <span class="ic">👥</span>
+        <h4>Team Efficiency Improvement</h4>
+        <p>Increased team readiness for installation with FTR/FTP by introducing new Ericsson tools.</p>
+      </div>
+      <div class="ach-card">
+        <span class="ic">🌍</span>
+        <h4>Multi-Cultural Leadership</h4>
+        <p>Mentored and led diverse teams across 10 countries, adapting to different cultural environments.</p>
+      </div>
+      <div class="ach-card">
+        <span class="ic">🏅</span>
+        <h4>Google Cloud PCA Cohort — #8, Silver League</h4>
+        <p>Ranked 8th in the Silver League of the Google Cloud PCA Cohort, sponsored by Ericsson and Mager.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Tab Navigation
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const pages = document.querySelectorAll('.page');
+<!-- ================= CERTIFICATIONS ================= -->
+<section id="certs">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">05 — CERTIFICATIONS &amp; TRAINING</span>
+      <h2>Credentials in progress and complete</h2>
+    </div>
+    <div class="cert-list">
+      <div class="cert-row">
+        <div><h4>Project Management Professional (PMP®)</h4><p>Professional certification in project management methodologies, leadership, and strategic business management.</p></div>
+        <span class="status done">Certified</span>
+      </div>
+      <div class="cert-row">
+        <div><h4>O.S.H.A 60 Hour Certified</h4><p>Occupational safety and health standards for construction and industrial environments.</p></div>
+        <span class="status done">Certified</span>
+      </div>
+      <div class="cert-row">
+        <div><h4>HCNA — Routing and Switching</h4><p>Huawei Certified Network Associate: network fundamentals, routing, and switching.</p></div>
+        <span class="status done">Certified</span>
+      </div>
+      <div class="cert-row">
+        <div><h4>Google Cloud PCA Cohort</h4><p>Cohort ID PCA02-GETCERT/2026.04.23 — ranked #8, Silver League, sponsored by Ericsson &amp; Mager.</p></div>
+        <span class="status done">Completed</span>
+      </div>
+      <div class="cert-row">
+        <div><h4>Google Associate Cloud Engineer (ACE)</h4><p>Exam preparation underway with a structured study plan and voucher in hand.</p></div>
+        <span class="status progress">In Progress</span>
+      </div>
+      <div class="cert-row">
+        <div><h4>Certified Kubernetes Administrator (CKA)</h4><p>Cluster administration, installation, configuration, and troubleshooting.</p></div>
+        <span class="status progress">In Progress</span>
+      </div>
+      <div class="cert-row">
+        <div><h4>Linux Foundation Certified System Administrator (LFCS)</h4><p>Advanced Linux system administration.</p></div>
+        <span class="status progress">In Progress</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent default anchor behavior
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">06 — CONTACT</span>
+      <h2>Let's talk</h2>
+    </div>
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:nour0gad@gmail.com">
+        <span class="eyebrow">EMAIL</span><div class="val">nour0gad@gmail.com</div>
+      </a>
+      <a class="contact-card" href="tel:+201040056434">
+        <span class="eyebrow">PHONE</span><div class="val">+20 104 005 6434</div>
+      </a>
+      <a class="contact-card" href="https://linkedin.com/in/nour-gad" target="_blank" rel="noopener">
+        <span class="eyebrow">LINKEDIN</span><div class="val">linkedin.com/in/nour-gad</div>
+      </a>
+      <a class="contact-card" href="https://github.com/nourGAD" target="_blank" rel="noopener">
+        <span class="eyebrow">GITHUB</span><div class="val">github.com/nourGAD</div>
+      </a>
+    </div>
+  </div>
+</section>
 
-                    // Remove active class from all links and pages
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    pages.forEach(p => p.classList.remove('active'));
+<footer>© 2026 Nour Gad — PMP® Certified DevOps &amp; Telecom Engineer</footer>
 
-                    // Add active class to clicked link and corresponding page
-                    link.classList.add('active');
-                    const pageId = link.getAttribute('data-page');
-                    document.getElementById(pageId).classList.add('active');
-                });
-            });
-        });
-
-        // Download Portfolio as HTML
-        function downloadHTML() {
-            const htmlContent = document.documentElement.outerHTML;
-            const blob = new Blob([htmlContent], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Nour_Gad_Portfolio.html';
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-    </script>
 </body>
 </html>
