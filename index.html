@@ -3,10 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nour Gad - DevOps &amp; Telecom Engineer</title>
+<title>Nour Gad — Senior RAN Engineer, Technical PM &amp; Cloud/DevOps</title>
+<meta name="description" content="Nour Gad — PMP®-certified Senior RAN Engineer and Technical Project Manager at Ericsson MMEA. 10+ years of 2G–5G delivery across 10 countries, Google Cloud ACE and KCNA certified, building automation tools for field operations.">
+<meta name="author" content="Nour Gad">
+<meta name="theme-color" content="#0A1128">
+<link rel="canonical" href="https://nourgad.github.io/portfolio/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Nour Gad — Senior RAN Engineer, Technical PM &amp; Cloud/DevOps">
+<meta property="og:description" content="10+ years of telecom delivery across the Middle East &amp; Africa. PMP®, Google Cloud ACE, KCNA. Building automation for field operations.">
+<meta property="og:url" content="https://nourgad.github.io/portfolio/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230A1128'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-family='Arial' font-weight='700' font-size='28' fill='%23F2A64B'%3ENG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Nour Gad",
+  "jobTitle": "Senior RAN Engineer & Technical Project Manager",
+  "worksFor": {"@type": "Organization", "name": "Ericsson"},
+  "address": {"@type": "PostalAddress", "addressLocality": "Cairo", "addressCountry": "EG"},
+  "email": "mailto:nour0gad@gmail.com",
+  "url": "https://nourgad.github.io/portfolio/",
+  "sameAs": ["https://linkedin.com/in/nour-gad", "https://github.com/nourGAD"],
+  "knowsAbout": ["LTE", "5G RAN", "Site Integration", "Project Management", "Google Cloud", "Kubernetes", "DevOps"]
+}
+</script>
 <style>
   :root{
     --navy-950:#0A1128;
@@ -15,7 +39,9 @@
     --navy-700:#25335E;
     --amber:#F2A64B;
     --amber-soft:#F7C384;
+    --amber-ink:#9A5F1E;
     --teal:#3FA9A0;
+    --teal-ink:#1E7460;
     --slate-50:#F6F7FB;
     --slate-100:#ECEFF5;
     --slate-300:#C7CCDA;
@@ -26,7 +52,8 @@
     --max:1120px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth;scroll-padding-top:72px;}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
   body{
     font-family:'Inter',sans-serif;
     color:var(--ink);
@@ -34,7 +61,7 @@
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
   .eyebrow{
     font-family:'IBM Plex Mono',monospace;
     font-size:0.72rem;
@@ -42,29 +69,40 @@
     text-transform:uppercase;
     color:var(--amber-soft);
   }
-  .eyebrow.dark{color:var(--amber-soft);}
-  .eyebrow.light{color:#B9772E;}
   a{color:inherit;}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
-  @media(max-width:640px){.wrap{padding:0 20px;}}
+  @media(max-width:640px){.wrap{padding:0 16px;}}
+  .skip{position:absolute;left:-999px;top:8px;background:var(--amber);color:var(--navy-950);padding:8px 14px;z-index:100;font-weight:600;}
+  .skip:focus{left:8px;}
 
   /* ===== NAV ===== */
   nav{
     position:sticky;top:0;z-index:50;
-    background:rgba(10,17,40,0.86);
+    background:rgba(10,17,40,0.9);
     backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line-dark);
   }
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
-  .brand{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.05rem;color:#fff;letter-spacing:-0.01em;}
+  .brand{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.05rem;color:#fff;letter-spacing:-0.01em;text-decoration:none;}
   .brand span{color:var(--amber);}
-  .navlinks{display:flex;gap:28px;list-style:none;}
+  .navlinks{display:flex;gap:24px;list-style:none;align-items:center;}
   .navlinks a{
-    color:var(--slate-300);font-size:0.88rem;text-decoration:none;font-weight:500;
+    color:var(--slate-300);font-size:0.86rem;text-decoration:none;font-weight:500;
     transition:color .2s;
   }
   .navlinks a:hover, .navlinks a:focus-visible{color:var(--amber-soft);}
-  @media(max-width:640px){.navlinks{display:none;}}
+  .navlinks .cv{border:1px solid var(--amber);color:var(--amber);padding:6px 12px;border-radius:3px;}
+  .menu-btn{display:none;background:none;border:1px solid var(--line-dark);color:#fff;border-radius:3px;padding:6px 10px;font:500 0.82rem 'IBM Plex Mono',monospace;cursor:pointer;}
+  @media(max-width:860px){
+    .menu-btn{display:block;}
+    .navlinks{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:0;background:var(--navy-950);border-bottom:1px solid var(--line-dark);padding:8px 16px 16px;}
+    .navlinks.open{display:flex;}
+    .navlinks li{width:100%;}
+    .navlinks a{display:block;padding:10px 0;font-size:0.95rem;}
+    .navlinks .cv{display:inline-block;margin-top:8px;padding:8px 14px;}
+  }
 
   /* ===== HERO ===== */
   .hero{
@@ -76,17 +114,18 @@
     border-bottom:1px solid var(--line-dark);
   }
   .hero .wrap{display:grid;grid-template-columns:1.05fr 0.95fr;gap:40px;align-items:center;}
-  @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;}}
-  .hero h1{font-size:clamp(2.1rem,4vw,3.1rem);font-weight:700;line-height:1.08;margin:14px 0 12px;}
-  .hero .title-line{font-family:'IBM Plex Mono',monospace;font-size:0.98rem;color:var(--teal);margin-bottom:18px;}
-  .hero p.lede{color:var(--slate-300);font-size:1.02rem;max-width:520px;margin-bottom:26px;}
+  @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;}.hero{padding:48px 0 40px;}}
+  .hero h1{font-size:clamp(2.2rem,4.4vw,3.3rem);font-weight:700;line-height:1.05;margin:14px 0 12px;}
+  .hero .title-line{font-family:'IBM Plex Mono',monospace;font-size:0.95rem;color:var(--teal);margin-bottom:18px;}
+  .hero p.lede{color:var(--slate-300);font-size:1.04rem;max-width:540px;margin-bottom:26px;}
+  .hero p.lede strong{color:#fff;font-weight:600;}
   .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:30px;}
   .btn{
     display:inline-flex;align-items:center;gap:8px;
     padding:11px 20px;border-radius:3px;
     font-size:0.88rem;font-weight:600;text-decoration:none;
     border:1px solid transparent;
-    transition:transform .15s, background .2s, border-color .2s;
+    transition:transform .15s, background .2s, border-color .2s, color .2s;
   }
   .btn:hover{transform:translateY(-1px);}
   .btn-primary{background:var(--amber);color:var(--navy-950);}
@@ -99,6 +138,8 @@
     padding:5px 10px;border:1px solid var(--line-dark);border-radius:2px;
     color:var(--slate-300);
   }
+  .avail{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:0.74rem;color:var(--slate-300);margin-top:22px;}
+  .avail .led{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(63,169,160,0.18);}
 
   /* network svg */
   .netviz{width:100%;height:auto;}
@@ -108,17 +149,21 @@
   .netviz .hub-label{fill:var(--teal);font-weight:600;}
   .netviz .lane{stroke:var(--line-dark);stroke-width:1;fill:none;}
   .netviz .pulse{stroke:var(--amber);stroke-width:1.4;fill:none;stroke-dasharray:4 8;animation:dash 3.5s linear infinite;opacity:0.8;}
+  .netviz .pulse.r{stroke:var(--teal);}
+  .netviz .node-dot.r{fill:var(--teal);}
   @keyframes dash{to{stroke-dashoffset:-120;}}
   @media (prefers-reduced-motion: reduce){.netviz .pulse{animation:none;}}
 
   /* ===== SECTION helpers ===== */
-  section{padding:64px 0;}
-  .section-head{margin-bottom:32px;}
-  .section-head h2{font-size:1.7rem;color:var(--ink);margin-top:6px;}
-  .section-head .eyebrow{color:#B9772E;}
+  section{padding:72px 0;}
+  @media(max-width:640px){section{padding:52px 0;}}
+  .section-head{margin-bottom:32px;max-width:760px;}
+  .section-head h2{font-size:clamp(1.4rem,2.6vw,1.75rem);color:var(--ink);margin-top:6px;line-height:1.25;}
+  .section-head p{color:var(--ink-soft);margin-top:10px;font-size:0.96rem;}
+  .section-head .eyebrow{color:var(--amber-ink);}
+  .alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
 
   /* ===== ABOUT ===== */
-  .about{background:var(--slate-50);}
   .stat-row{
     display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
     background:var(--line);border:1px solid var(--line);
@@ -129,10 +174,10 @@
   .stat .num{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:var(--navy-900);}
   .stat .label{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px;}
   .about-grid{display:grid;grid-template-columns:1.3fr 0.9fr;gap:48px;}
-  @media(max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  @media(max-width:800px){.about-grid{grid-template-columns:1fr;gap:28px;}}
   .about-text p{color:var(--ink-soft);margin-bottom:14px;font-size:0.98rem;}
   .about-text strong{color:var(--ink);}
-  .country-panel{background:var(--navy-950);border-radius:4px;padding:22px 22px 20px;color:#fff;}
+  .country-panel{background:var(--navy-950);border-radius:4px;padding:22px 22px 20px;color:#fff;align-self:start;}
   .country-panel .eyebrow{margin-bottom:10px;display:block;}
   .country-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
   .country-chip{
@@ -141,13 +186,33 @@
     padding:5px 9px;border-radius:2px;color:var(--slate-300);
   }
   .country-chip.remote{border-color:var(--teal);color:var(--teal);}
-  .legend{display:flex;gap:16px;margin-top:14px;font-size:0.72rem;color:var(--slate-300);font-family:'IBM Plex Mono',monospace;}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;font-size:0.72rem;color:var(--slate-300);font-family:'IBM Plex Mono',monospace;}
   .legend span{display:inline-flex;align-items:center;gap:6px;}
   .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
   .dot.onsite{background:var(--amber);}
   .dot.remote{background:var(--teal);}
+  .operators{margin-top:18px;padding-top:16px;border-top:1px solid var(--line-dark);}
+  .operators p{font-size:0.84rem;color:var(--slate-300);margin-top:6px;}
   .edu{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);}
-  .edu .eyebrow{color:#B9772E;margin-bottom:6px;display:block;}
+  .edu .eyebrow{color:var(--amber-ink);margin-bottom:6px;display:block;}
+
+  /* ===== EXPERIENCE ===== */
+  .timeline{position:relative;padding-left:28px;}
+  .timeline::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line);}
+  .job{position:relative;background:#fff;border:1px solid var(--line);border-radius:4px;padding:26px 26px 22px;margin-bottom:20px;}
+  .job:last-child{margin-bottom:0;}
+  .job::before{content:"";position:absolute;left:-28px;top:30px;width:14px;height:14px;border-radius:50%;background:var(--slate-50);border:3px solid var(--navy-900);}
+  .job.current::before{border-color:var(--amber);background:var(--amber);box-shadow:0 0 0 5px rgba(242,166,75,0.18);}
+  .job-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline;margin-bottom:4px;}
+  .job h3{font-size:1.15rem;}
+  .job .dates{font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:var(--ink-soft);white-space:nowrap;}
+  .job .org{font-weight:600;color:var(--teal-ink);font-size:0.92rem;margin-bottom:14px;}
+  .job .org span{color:var(--ink-soft);font-weight:400;}
+  .job ul{list-style:none;display:grid;gap:9px;margin-bottom:16px;}
+  .job li{position:relative;padding-left:18px;color:var(--ink-soft);font-size:0.94rem;}
+  .job li::before{content:"";position:absolute;left:0;top:0.62em;width:7px;height:2px;background:var(--amber);}
+  .job li strong{color:var(--ink);font-weight:600;}
+  .job .tags{display:flex;flex-wrap:wrap;gap:6px;}
 
   /* ===== COMPETENCIES ===== */
   .comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
@@ -155,10 +220,37 @@
   @media(max-width:600px){.comp-grid{grid-template-columns:1fr;}}
   .comp-card{background:#fff;padding:24px 22px;}
   .comp-card h3{font-size:1.02rem;margin-bottom:4px;}
-  .comp-card .note{font-size:0.78rem;color:var(--teal);font-family:'IBM Plex Mono',monospace;margin-bottom:12px;display:block;}
-  .comp-card .tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .comp-card .note{font-size:0.76rem;color:var(--teal-ink);font-family:'IBM Plex Mono',monospace;margin-bottom:12px;display:block;}
+  .comp-card h3 + .tags{margin-top:12px;}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;}
   .tag{font-size:0.78rem;background:var(--slate-100);border:1px solid var(--line);padding:4px 9px;border-radius:2px;color:var(--ink-soft);}
   .comp-card.highlight{background:#FFF7EC;}
+
+  /* ===== BUILT TOOLS ===== */
+  .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media(max-width:960px){.tool-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:640px){.tool-grid{grid-template-columns:1fr;}}
+  .tool{
+    background:#fff;border:1px solid var(--line);border-radius:4px;padding:24px;
+    display:flex;flex-direction:column;
+    transition:box-shadow .2s, transform .2s, border-color .2s;
+  }
+  .tool:hover{box-shadow:0 8px 24px rgba(15,26,56,0.08);transform:translateY(-2px);border-color:var(--slate-300);}
+  .tool-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .tool .glyph{width:38px;height:38px;border-radius:4px;background:var(--navy-950);display:grid;place-items:center;}
+  .tool .glyph svg{width:20px;height:20px;stroke:var(--amber);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .badge{font-family:'IBM Plex Mono',monospace;font-size:0.66rem;letter-spacing:0.06em;text-transform:uppercase;padding:4px 8px;border-radius:2px;}
+  .badge.live{background:#E4F5F0;color:var(--teal-ink);}
+  .badge.proto{background:#FDF0DE;color:var(--amber-ink);}
+  .badge.internal{background:var(--slate-100);color:var(--ink-soft);}
+  .tool h3{font-size:1.06rem;margin-bottom:8px;}
+  .tool p{color:var(--ink-soft);font-size:0.9rem;margin-bottom:12px;}
+  .tool .impact{font-size:0.84rem;color:var(--ink);border-left:2px solid var(--teal);padding-left:10px;margin-bottom:14px;}
+  .tool .tags{margin-top:auto;}
+  .tool .links{margin-top:14px;display:flex;gap:14px;}
+  .tool .links a{font-size:0.82rem;font-weight:600;color:var(--navy-900);text-decoration:none;border-bottom:1px solid var(--amber);}
+  .tool .links a:hover{color:var(--amber-ink);}
+  .tool.feature{border-top:3px solid var(--amber);}
 
   /* ===== PROJECTS ===== */
   .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
@@ -170,94 +262,115 @@
   }
   .proj-card:hover{box-shadow:0 8px 24px rgba(15,26,56,0.08);transform:translateY(-2px);}
   .proj-card.feature{border-top-color:var(--amber);background:linear-gradient(180deg,#FFF9F0 0%,#fff 40%);}
-  .proj-card .eyebrow{margin-bottom:8px;display:block;}
+  .proj-card .eyebrow{margin-bottom:8px;display:block;color:var(--amber-ink);}
   .proj-card h3{font-size:1.08rem;margin-bottom:8px;}
   .proj-card p{color:var(--ink-soft);font-size:0.92rem;margin-bottom:14px;}
-  .proj-card .tags{display:flex;flex-wrap:wrap;gap:6px;}
 
   /* ===== ACHIEVEMENTS ===== */
   .ach-band{background:var(--navy-950);color:#fff;}
   .ach-band .section-head .eyebrow{color:var(--amber-soft);}
   .ach-band .section-head h2{color:#fff;}
-  .ach-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-dark);}
+  .ach-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-dark);border:1px solid var(--line-dark);}
   @media(max-width:900px){.ach-grid{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:560px){.ach-grid{grid-template-columns:1fr;}}
   .ach-card{background:var(--navy-900);padding:22px 20px;}
-  .ach-card .ic{font-size:1.4rem;margin-bottom:10px;display:block;}
-  .ach-card h4{font-size:0.95rem;color:#fff;margin-bottom:8px;}
-  .ach-card p{font-size:0.82rem;color:var(--slate-300);}
+  .ach-card .ic{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--amber);letter-spacing:0.1em;margin-bottom:10px;display:block;}
+  .ach-card h4{font-size:0.98rem;color:#fff;margin-bottom:8px;}
+  .ach-card p{font-size:0.84rem;color:var(--slate-300);}
 
   /* ===== CERTS ===== */
+  .cert-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media(max-width:860px){.cert-cols{grid-template-columns:1fr;}}
+  .cert-cols h3{font-size:0.8rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px;font-weight:500;}
   .cert-list{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:4px;overflow:hidden;}
   .cert-row{
     display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;
-    padding:18px 22px;border-bottom:1px solid var(--line);background:#fff;
+    padding:16px 20px;border-bottom:1px solid var(--line);background:#fff;
   }
   .cert-row:last-child{border-bottom:none;}
-  .cert-row h4{font-size:0.96rem;margin-bottom:3px;}
-  .cert-row p{font-size:0.82rem;color:var(--ink-soft);}
+  .cert-row h4{font-size:0.95rem;margin-bottom:2px;}
+  .cert-row p{font-size:0.8rem;color:var(--ink-soft);}
   .status{
-    font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;
+    font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;
     padding:5px 10px;border-radius:2px;white-space:nowrap;
   }
-  .status.done{background:#E4F5F0;color:#1E7460;}
-  .status.progress{background:#FDF0DE;color:#B9772E;}
+  .status.done{background:#E4F5F0;color:var(--teal-ink);}
+  .status.progress{background:#FDF0DE;color:var(--amber-ink);}
 
   /* ===== CONTACT ===== */
   .contact{background:var(--navy-950);color:#fff;}
   .contact .section-head .eyebrow{color:var(--amber-soft);}
   .contact .section-head h2{color:#fff;}
-  .contact-grid{display:flex;flex-wrap:wrap;gap:14px;}
+  .contact .section-head p{color:var(--slate-300);}
+  .contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  @media(max-width:900px){.contact-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.contact-grid{grid-template-columns:1fr;}}
   .contact-card{
-    flex:1;min-width:220px;
     background:var(--navy-900);border:1px solid var(--line-dark);border-radius:4px;
-    padding:20px;text-decoration:none;color:#fff;transition:border-color .2s;
+    padding:20px;text-decoration:none;color:#fff;transition:border-color .2s;min-width:0;
   }
   .contact-card:hover{border-color:var(--amber);}
   .contact-card .eyebrow{color:var(--teal);margin-bottom:6px;display:block;}
-  .contact-card .val{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;}
+  .contact-card .val{font-family:'Space Grotesk',sans-serif;font-size:0.98rem;font-weight:600;overflow-wrap:anywhere;}
 
-  footer{background:var(--navy-950);border-top:1px solid var(--line-dark);color:var(--slate-300);padding:22px 0;font-size:0.82rem;text-align:center;}
+  footer{background:var(--navy-950);border-top:1px solid var(--line-dark);color:var(--slate-300);padding:22px 0;font-size:0.82rem;}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  footer a{color:var(--amber-soft);text-decoration:none;}
+
+  /* ===== PRINT ===== */
+  @media print{
+    nav,.hero-cta,.netviz,.avail,.menu-btn,.tool .links{display:none !important;}
+    .hero,.ach-band,.contact,footer{background:#fff !important;color:#000 !important;}
+    .hero .title-line,.hero p.lede,.ach-card p,.ach-card h4,.contact .section-head h2{color:#000 !important;}
+    .ach-card,.contact-card{background:#fff !important;color:#000 !important;border:1px solid #ccc;}
+    section{padding:24px 0;}
+    .job,.tool,.proj-card,.cert-row{break-inside:avoid;}
+  }
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<nav>
+<nav aria-label="Primary">
   <div class="wrap">
-    <div class="brand">Nour Gad<span>.</span></div>
-    <ul class="navlinks">
+    <a class="brand" href="#top">Nour Gad<span>.</span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="navlinks">MENU</button>
+    <ul class="navlinks" id="navlinks">
       <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#training">Training</a></li>
+      <li><a href="#tools">Built Tools</a></li>
+      <li><a href="#projects">Delivery</a></li>
       <li><a href="#certs">Certifications</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="cv">Get in touch</a></li>
     </ul>
   </div>
 </nav>
 
 <!-- ================= HERO ================= -->
-<header class="hero">
+<header class="hero" id="top">
   <div class="wrap">
     <div>
-      <span class="eyebrow dark">PMP® · DEVOPS &amp; TELECOM ENGINEER</span>
+      <span class="eyebrow">PMP® · GOOGLE CLOUD ACE · KCNA</span>
       <h1>Nour Gad</h1>
-      <div class="title-line">DevOps &amp; Telecom Engineer — RAN Delivery, Cloud &amp; Field Training</div>
-      <p class="lede">10+ years leading network rollout, integration, and technical training programs across the Middle East &amp; Africa — now building cloud and automation skills to bridge telecom operations with DevOps practice.</p>
+      <div class="title-line">Senior RAN Engineer · Technical Project Manager · Cloud &amp; DevOps</div>
+      <p class="lede"><strong>10+ years</strong> delivering 2G–5G networks, field integration, and engineer training across <strong>10 countries in the Middle East &amp; Africa</strong> — and building the cloud and automation tooling that makes field operations faster and more consistent.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="mailto:nour0gad@gmail.com">Email Me</a>
         <a class="btn btn-ghost" href="https://linkedin.com/in/nour-gad" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn btn-ghost" href="https://github.com/nourGAD" target="_blank" rel="noopener">GitHub</a>
       </div>
       <div class="tagpills">
-        <span class="pill">RAN INTEGRATION</span>
-        <span class="pill">MULTI-COUNTRY DELIVERY</span>
+        <span class="pill">LTE / 5G RAN</span>
+        <span class="pill">INTEGRATION &amp; COMMISSIONING</span>
+        <span class="pill">MULTI-VENDOR</span>
         <span class="pill">TECHNICAL TRAINING</span>
-        <span class="pill">CLOUD &amp; DEVOPS (LAB)</span>
+        <span class="pill">GCP · KUBERNETES · IaC</span>
       </div>
+      <div class="avail"><span class="led" aria-hidden="true"></span>Based in Cairo · Open to RAN, Technical PM &amp; Cloud/DevOps roles</div>
     </div>
     <div>
-      <svg class="netviz" viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coverage network across MEA region">
+      <svg class="netviz" viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Delivery footprint radiating from Cairo across the Middle East and Africa">
         <circle cx="230" cy="190" r="7" class="hub-dot"/>
         <text x="230" y="176" text-anchor="middle" class="hub-label">CAIRO · HUB</text>
 
@@ -286,53 +399,55 @@
         <circle cx="260" cy="300" r="4" class="node-dot"/><text x="270" y="304">TÜRKİYE</text>
 
         <path class="lane" d="M230,190 C180,230 130,260 100,300"/>
-        <path class="pulse" d="M230,190 C180,230 130,260 100,300" style="stroke:#3FA9A0;"/>
-        <circle cx="100" cy="300" r="4" style="fill:#3FA9A0;"/><text x="58" y="298">S. AFRICA</text>
+        <path class="pulse r" d="M230,190 C180,230 130,260 100,300"/>
+        <circle cx="100" cy="300" r="4" class="node-dot r"/><text x="58" y="298">S. AFRICA</text>
 
         <path class="lane" d="M230,190 C200,240 160,280 130,330"/>
-        <path class="pulse" d="M230,190 C200,240 160,280 130,330" style="stroke:#3FA9A0;"/>
-        <circle cx="130" cy="330" r="4" style="fill:#3FA9A0;"/><text x="90" y="348">ANGOLA</text>
+        <path class="pulse r" d="M230,190 C200,240 160,280 130,330"/>
+        <circle cx="130" cy="330" r="4" class="node-dot r"/><text x="90" y="348">ANGOLA</text>
 
         <path class="lane" d="M230,190 C290,220 340,250 370,290"/>
-        <path class="pulse" d="M230,190 C290,220 340,250 370,290" style="stroke:#3FA9A0;"/>
-        <circle cx="370" cy="290" r="4" style="fill:#3FA9A0;"/><text x="330" y="308">OMAN</text>
+        <path class="pulse r" d="M230,190 C290,220 340,250 370,290"/>
+        <circle cx="370" cy="290" r="4" class="node-dot r"/><text x="330" y="308">OMAN</text>
 
         <path class="lane" d="M230,190 C310,210 380,230 420,250"/>
-        <path class="pulse" d="M230,190 C310,210 380,230 420,250" style="stroke:#3FA9A0;"/>
-        <circle cx="420" cy="250" r="4" style="fill:#3FA9A0;"/><text x="380" y="268">ZAMBIA</text>
+        <path class="pulse r" d="M230,190 C310,210 380,230 420,250"/>
+        <circle cx="420" cy="250" r="4" class="node-dot r"/><text x="380" y="268">ZAMBIA</text>
       </svg>
     </div>
   </div>
 </header>
 
+<main id="main">
+
 <!-- ================= ABOUT ================= -->
-<section class="about" id="about">
+<section id="about">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">01 — ABOUT</span>
-      <h2>Field-tested across ten countries, now building toward cloud &amp; automation</h2>
+      <span class="eyebrow">01 — About</span>
+      <h2>Field-proven telecom delivery, now paired with cloud &amp; automation</h2>
     </div>
 
     <div class="stat-row">
-      <div class="stat"><div class="num">10+</div><div class="label">Years Experience</div></div>
+      <div class="stat"><div class="num">10+</div><div class="label">Years in Telecom</div></div>
       <div class="stat"><div class="num">10</div><div class="label">Countries Delivered</div></div>
       <div class="stat"><div class="num">80+</div><div class="label">Engineers Trained</div></div>
-      <div class="stat"><div class="num">PMP®</div><div class="label">Certified PM</div></div>
+      <div class="stat"><div class="num">2G→5G</div><div class="label">Every RAN Generation</div></div>
     </div>
 
     <div class="about-grid">
       <div class="about-text">
-        <p>Results-driven <strong>RAN &amp; Cloud Engineer / Senior Telecom Project Manager</strong> with 10+ years across telecom network deployment, field operations, and technical training delivery — most recently focused on Ericsson RAN rollout and the <strong>Jawwal</strong> account in Palestine.</p>
-        <p>My work sits at the intersection of hands-on field engineering and program delivery: leading multi-team rollouts, resolving integration and commissioning issues, and translating technical detail into training that field engineers can act on — often delivered bilingually in Arabic and English, on-site and remote.</p>
-        <p>I'm actively building cloud and automation depth — Docker, Kubernetes, Ansible, Terraform, and Google Cloud — through structured lab programs, as I work toward roles that bridge telecom operations with DevOps practice.</p>
+        <p>I'm a <strong>PMP®-certified Senior RAN Engineer and Technical Project Manager</strong> at <strong>Ericsson MMEA</strong>, where I mentor and certify the partner (ASP) teams that install, integrate, and commission radio sites across the Middle East &amp; Africa.</p>
+        <p>My work sits between the field and the program: leading multi-team rollouts, resolving integration and commissioning issues across <strong>Ericsson, Huawei, and Nokia</strong> environments, and turning that knowledge into training that field engineers can act on — delivered bilingually in Arabic and English, on-site and remote. I've worked across every generation from 2G to 5G, including research and testing work on 6G.</p>
+        <p>Alongside delivery, I build the <strong>tools my teams actually use</strong> — MOP generators, productivity dashboards, and QA workflows — and I'm certified in <strong>Google Cloud (ACE)</strong> and <strong>Kubernetes (KCNA)</strong>, bringing DevOps practice into telecom operations.</p>
         <div class="edu">
-          <span class="eyebrow">EDUCATION</span>
-          Bachelor of Engineering — Electronics &amp; Communications
+          <span class="eyebrow">Education</span>
+          Bachelor of Engineering — Electronics &amp; Communications Engineering, 2014
         </div>
       </div>
 
       <div class="country-panel">
-        <span class="eyebrow dark">COVERAGE</span>
+        <span class="eyebrow">Coverage</span>
         <div class="country-list">
           <span class="country-chip">EGYPT</span>
           <span class="country-chip">KSA</span>
@@ -349,7 +464,57 @@
           <span><span class="dot onsite"></span>On-site delivery</span>
           <span><span class="dot remote"></span>Remote support &amp; training</span>
         </div>
+        <div class="operators">
+          <span class="eyebrow">Operators served</span>
+          <p>STC · Mobily · Zain · du · Umniah · MTN · Unitel · Jawwal · Orange</p>
+        </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">02 — Experience</span>
+      <h2>Where I've worked</h2>
+    </div>
+
+    <div class="timeline">
+      <article class="job current">
+        <div class="job-head">
+          <h3>ASP Mentor &amp; Certifier — Senior RAN Engineer</h3>
+          <span class="dates">2019 — Present</span>
+        </div>
+        <div class="org">Ericsson <span>· MMEA (Middle East &amp; Africa) · Cairo-based, regional</span></div>
+        <ul>
+          <li><strong>Mentor and certify ASP field teams</strong> on RAN installation, integration, and commissioning quality across MMEA markets — on-site and remote support spanning the Gulf, Levant, and Southern Africa.</li>
+          <li><strong>Designed and delivered a 2-month RAN technical training program</strong> — 5 batches, 80 field engineers from Jawwal, Duracom, and subcontractor teams in Palestine — covering hardware, commissioning, MoShell/LMT/ZT, and troubleshooting.</li>
+          <li><strong>Built internal automation tools</strong> — a RAN/TRM MOP Generator, an ASP productivity dashboard, and field reference matrices — cutting manual documentation work for regional teams.</li>
+          <li>Provide remote training and live support for Jawwal's <strong>SRS (Smart Rollout Support)</strong> tool, coordinating between field, NDO, and Ericsson stakeholders.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">LTE / 5G RAN</span><span class="tag">ASP Management</span><span class="tag">Training Design</span>
+          <span class="tag">Transmission / MW</span><span class="tag">Stakeholder Management</span><span class="tag">Automation</span>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="job-head">
+          <h3>Coordinator &amp; Site Supervisor</h3>
+          <span class="dates">2016 — 2019</span>
+        </div>
+        <div class="org">LCC <span>· Telecom infrastructure services</span></div>
+        <ul>
+          <li><strong>Supervised telecom site installation</strong> and coordinated field teams and subcontractors through build, installation, and handover.</li>
+          <li>Owned day-to-day <strong>site quality and HSE compliance</strong>, team scheduling, and progress reporting to project management.</li>
+          <li>Built the hands-on field foundation — equipment, sites, and crews — that later shaped my training and certification work at Ericsson.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Site Supervision</span><span class="tag">Team Coordination</span><span class="tag">HSE</span><span class="tag">Reporting</span>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -358,7 +523,7 @@
 <section id="skills">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">02 — CORE COMPETENCIES</span>
+      <span class="eyebrow">03 — Core Competencies</span>
       <h2>Skills across network delivery, cloud, and enablement</h2>
     </div>
     <div class="comp-grid">
@@ -366,115 +531,195 @@
         <h3>RAN &amp; Telecom Networks</h3>
         <div class="tags">
           <span class="tag">2G/3G/4G/5G RAN</span><span class="tag">Ericsson Baseband</span>
-          <span class="tag">Integration &amp; Commissioning</span><span class="tag">Transmission</span>
-          <span class="tag">MoShell / LMT / ZT</span><span class="tag">Huawei</span><span class="tag">Nokia</span>
+          <span class="tag">Integration &amp; Commissioning</span><span class="tag">Transmission / MW</span>
+          <span class="tag">MoShell / LMT / ZT</span><span class="tag">Huawei</span><span class="tag">Nokia</span><span class="tag">6G R&amp;D Testing</span>
         </div>
       </div>
       <div class="comp-card highlight">
         <h3>Cloud &amp; DevOps</h3>
-        <span class="note">Hands-on lab experience (NTI Egypt program &amp; Google Cloud Cohort)</span>
+        <span class="note">Google Cloud ACE · KCNA · NTI DevOps labs</span>
         <div class="tags">
-          <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Jenkins</span>
-          <span class="tag">Ansible</span><span class="tag">Terraform</span><span class="tag">OpenStack</span>
-          <span class="tag">Google Cloud Platform</span>
+          <span class="tag">Google Cloud Platform</span><span class="tag">Kubernetes</span><span class="tag">Docker</span>
+          <span class="tag">Terraform</span><span class="tag">Ansible</span><span class="tag">Jenkins</span>
+          <span class="tag">GitHub Actions</span><span class="tag">OpenStack</span>
         </div>
       </div>
       <div class="comp-card">
         <h3>Project &amp; Program Management</h3>
         <div class="tags">
           <span class="tag">PMP® Methodology</span><span class="tag">Multi-country Delivery</span>
-          <span class="tag">Subcontractor Coordination</span><span class="tag">Stakeholder Comms</span>
+          <span class="tag">Subcontractor / ASP Coordination</span><span class="tag">Stakeholder Comms</span>
           <span class="tag">HSE Compliance</span><span class="tag">Risk &amp; Reporting</span>
         </div>
       </div>
       <div class="comp-card">
         <h3>Training &amp; Enablement</h3>
         <div class="tags">
-          <span class="tag">Technical Training Delivery</span><span class="tag">Remote Facilitation</span>
-          <span class="tag">Bilingual (AR/EN)</span><span class="tag">SRS Tools</span>
-          <span class="tag">Curriculum Design</span><span class="tag">Field Mentoring</span>
+          <span class="tag">Curriculum Design</span><span class="tag">Technical Training Delivery</span>
+          <span class="tag">Remote Facilitation</span><span class="tag">Bilingual (AR/EN)</span>
+          <span class="tag">Trainee Assessment</span><span class="tag">Field Mentoring</span>
         </div>
       </div>
       <div class="comp-card">
-        <h3>Tools &amp; Platforms</h3>
+        <h3>Build &amp; Automate</h3>
         <div class="tags">
-          <span class="tag">Linux Administration</span><span class="tag">Power BI</span>
-          <span class="tag">MS Excel (Advanced)</span><span class="tag">Git</span><span class="tag">MOP Planning</span>
+          <span class="tag">JavaScript / HTML</span><span class="tag">React</span><span class="tag">Python</span>
+          <span class="tag">REST APIs</span><span class="tag">Git &amp; GitHub</span><span class="tag">Linux</span>
+          <span class="tag">Excel (Advanced)</span><span class="tag">Power BI</span>
         </div>
       </div>
       <div class="comp-card">
-        <h3>Team &amp; Field Leadership</h3>
+        <h3>Documentation &amp; Quality</h3>
         <div class="tags">
-          <span class="tag">Cross-cultural Team Leadership</span><span class="tag">ASP Management</span>
-          <span class="tag">FTR / FTP Process</span><span class="tag">Drone-assisted Survey</span>
+          <span class="tag">MOP Authoring</span><span class="tag">PAT / Acceptance</span>
+          <span class="tag">FTR / FTP Process</span><span class="tag">Site Photo QA</span>
+          <span class="tag">Drone-assisted Survey</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= PROJECTS ================= -->
-<section id="projects" style="background:var(--slate-50);">
+<!-- ================= BUILT TOOLS ================= -->
+<section id="tools" class="alt">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">03 — SELECTED PROJECTS</span>
-      <h2>Delivery across markets and disciplines</h2>
+      <span class="eyebrow">04 — Engineering &amp; Automation</span>
+      <h2>Tools I've built for field operations</h2>
+      <p>Where telecom meets software: small, focused tools that remove manual steps from rollout, documentation, and partner management.</p>
+    </div>
+
+    <div class="tool-grid">
+      <article class="tool feature">
+        <div class="tool-top">
+          <div class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></svg></div>
+          <span class="badge live">Live · GitHub Pages</span>
+        </div>
+        <h3>MOP Generator</h3>
+        <p>Web app that turns site and equipment data into a complete installation Method of Procedure (Excel/PDF). Separate <strong>RAN</strong> and <strong>TRM (microwave link)</strong> modes; country-agnostic templates built from real Lebanon, Libya, and Madagascar MOPs.</p>
+        <div class="impact">Replaces hours of manual MOP drafting per site; proposed for internal hosting on Ericsson's E2C platform.</div>
+        <div class="tags"><span class="tag">JavaScript</span><span class="tag">Excel/PDF export</span><span class="tag">GitHub Actions</span></div>
+        <div class="links"><a href="https://github.com/nourGAD/MOP-generator" target="_blank" rel="noopener">View repository →</a></div>
+      </article>
+
+      <article class="tool">
+        <div class="tool-top">
+          <div class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+          <span class="badge internal">Internal</span>
+        </div>
+        <h3>ASP Productivity Dashboard</h3>
+        <p>Interactive dashboard tracking productivity per ASP across MMEA — planned capacity versus active teams — combining EHS data with final SLA results.</p>
+        <div class="impact">Gives regional management a single view of partner performance instead of scattered spreadsheets.</div>
+        <div class="tags"><span class="tag">HTML/JS</span><span class="tag">Data Viz</span><span class="tag">KPI Design</span></div>
+      </article>
+
+      <article class="tool">
+        <div class="tool-top">
+          <div class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 5l1.5-2h5L16 5"/></svg></div>
+          <span class="badge proto">Prototype</span>
+        </div>
+        <h3>AI Site Photo QA</h3>
+        <p>React application that uses the Gemini API to review site installation photos against quality checklists, flagging likely issues before acceptance.</p>
+        <div class="impact">Aims to shorten photo-review loops between field teams and quality reviewers.</div>
+        <div class="tags"><span class="tag">React</span><span class="tag">Gemini API</span><span class="tag">Computer Vision</span></div>
+      </article>
+
+      <article class="tool">
+        <div class="tool-top">
+          <div class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7M17.5 14v7"/></svg></div>
+          <span class="badge proto">Prototype</span>
+        </div>
+        <h3>FieldOps Platform</h3>
+        <p>Concept and prototype of a web-based field operations platform with a MOP planning module — pitched to management as a path to one system for planning, tracking, and documenting site work.</p>
+        <div class="tags"><span class="tag">Product Design</span><span class="tag">Web App</span><span class="tag">Ops Workflow</span></div>
+      </article>
+
+      <article class="tool">
+        <div class="tool-top">
+          <div class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 7h8M8 12h8M8 17h4"/><path d="M4 4h16v16H4z"/></svg></div>
+          <span class="badge internal">Internal</span>
+        </div>
+        <h3>Business System Integrations</h3>
+        <p>API-driven automation for training and commercial workflows: user provisioning and manager linking through the Docebo LMS API, and quotation and billing flows built on Salesforce, Zuora, and Stripe.</p>
+        <div class="tags"><span class="tag">REST APIs</span><span class="tag">Docebo</span><span class="tag">Salesforce</span><span class="tag">Zuora / Stripe</span></div>
+      </article>
+
+      <article class="tool">
+        <div class="tool-top">
+          <div class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg></div>
+          <span class="badge live">Open source</span>
+        </div>
+        <h3>Portfolio-as-Code</h3>
+        <p>This site, run like production: containerised with hardened NGINX, Kubernetes manifests with probes and security context, Terraform for Google Cloud Run, and a GitHub Actions pipeline that lints, link-checks, builds, and scans the image.</p>
+        <div class="tags"><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Terraform</span><span class="tag">GitHub Actions</span><span class="tag">Trivy</span></div>
+        <div class="links"><a href="https://github.com/nourGAD/portfolio" target="_blank" rel="noopener">View repository →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">05 — Selected Delivery</span>
+      <h2>Projects across markets and operators</h2>
     </div>
     <div class="proj-grid">
 
       <div class="proj-card feature">
-        <span class="eyebrow">PALESTINE — JAWWAL &amp; DURACOM</span>
+        <span class="eyebrow">Palestine — Jawwal &amp; Duracom</span>
         <h3>RAN Technical Training Program</h3>
         <p>Designed and delivered a 2-month RAN technical training program across 5 batches, training 80 field engineers from Jawwal, Duracom, and subcontractor teams — covering hardware installation, commissioning, MoShell/LMT/ZT, and troubleshooting.</p>
-        <div class="tags"><span class="tag">RAN Training</span><span class="tag">Multi-batch Delivery</span><span class="tag">Field Engineering</span></div>
+        <div class="tags"><span class="tag">RAN Training</span><span class="tag">Multi-batch Delivery</span><span class="tag">Assessment</span></div>
       </div>
 
       <div class="proj-card feature">
-        <span class="eyebrow">PALESTINE — JAWWAL</span>
-        <h3>SRS Rollout Training &amp; Support</h3>
-        <p>Delivering remote training and live technical support for Jawwal's Smart Rollout Support (SRS) tool, resolving site upload validation errors and drafting technical communications between field, NDO, and Ericsson stakeholders.</p>
-        <div class="tags"><span class="tag">Remote Training</span><span class="tag">SRS Tool</span><span class="tag">Stakeholder Comms</span></div>
+        <span class="eyebrow">Palestine — Jawwal</span>
+        <h3>PLS Rollout &amp; SRS Support</h3>
+        <p>Supporting the Jawwal PLS rollout with tracker analysis and dashboards, plus remote training and live support for the SRS tool — resolving site-upload validation errors and drafting communications between field, NDO, and Ericsson.</p>
+        <div class="tags"><span class="tag">Rollout Tracking</span><span class="tag">Dashboards</span><span class="tag">Remote Training</span></div>
       </div>
 
       <div class="proj-card">
         <span class="eyebrow">KSA — STC</span>
         <h3>5G New Sites Deployment</h3>
-        <p>Led 14 teams to install and commission 5G-ready equipment, ensuring seamless deployment of next-generation telecom infrastructure with safety and quality compliance.</p>
+        <p>Led 14 teams to install and commission 5G-ready equipment, delivering next-generation infrastructure with full safety and quality compliance.</p>
         <div class="tags"><span class="tag">5G RAN</span><span class="tag">Team Leadership</span><span class="tag">Commissioning</span></div>
       </div>
 
       <div class="proj-card">
-        <span class="eyebrow">SOUTH AFRICA — MTN</span>
-        <h3>MTN Technical Support</h3>
-        <p>Provided technical support and mentoring for installation and configuration while organizing team tasks to ensure smooth implementation.</p>
-        <div class="tags"><span class="tag">Technical Support</span><span class="tag">Mentoring</span><span class="tag">Configuration</span></div>
+        <span class="eyebrow">Djibouti</span>
+        <h3>RAN Site Investigation</h3>
+        <p>Country-wide investigation of RAN infrastructure issues, documenting platform-specific findings and recommended corrective actions.</p>
+        <div class="tags"><span class="tag">Site Audit</span><span class="tag">Root Cause</span><span class="tag">Reporting</span></div>
       </div>
 
       <div class="proj-card">
-        <span class="eyebrow">JORDAN — UMNIA</span>
+        <span class="eyebrow">Jordan — Umniah</span>
         <h3>PAT Technical Documentation</h3>
-        <p>Handled PAT technical document submission and clearance for E2E project delivery, reducing customer complaints by resolving PAT issues efficiently.</p>
+        <p>Owned PAT document submission and clearance for end-to-end project delivery, significantly reducing customer complaints by resolving acceptance issues quickly.</p>
         <div class="tags"><span class="tag">PAT Process</span><span class="tag">Documentation</span><span class="tag">Quality Assurance</span></div>
       </div>
 
       <div class="proj-card">
-        <span class="eyebrow">UAE — DU</span>
-        <h3>DU Project Management</h3>
-        <p>Managing teams to reach project objectives, generating analytical reports and administering team HSE certificates.</p>
+        <span class="eyebrow">UAE — du</span>
+        <h3>Field Project Management</h3>
+        <p>Managed field teams to project objectives, produced analytical progress reports, and administered team HSE certification.</p>
         <div class="tags"><span class="tag">Project Management</span><span class="tag">Analytics</span><span class="tag">HSE Compliance</span></div>
       </div>
 
       <div class="proj-card">
-        <span class="eyebrow">ANGOLA — UNITEL</span>
-        <h3>Unitel Angola Operations</h3>
-        <p>Supported and followed up with 3 ASPs managing more than 10 implementation teams, including drone operations for inspection and data collection.</p>
+        <span class="eyebrow">Angola — Unitel</span>
+        <h3>ASP Operations &amp; Drone Survey</h3>
+        <p>Supported 3 ASPs running 10+ implementation teams, including drone operations for site inspection and data collection.</p>
         <div class="tags"><span class="tag">ASP Management</span><span class="tag">Drone Operations</span></div>
       </div>
 
       <div class="proj-card">
-        <span class="eyebrow">CLOUD INFRASTRUCTURE</span>
-        <h3>OpenStack Environment Setup</h3>
-        <p>Prepared VM hosting environment for packet core systems in a telecom project, implementing cloud-native infrastructure with automation.</p>
+        <span class="eyebrow">Cloud Infrastructure</span>
+        <h3>OpenStack Environment for Packet Core</h3>
+        <p>Prepared the VM hosting environment for packet core systems in a telecom project, applying cloud-native infrastructure and automation practices.</p>
         <div class="tags"><span class="tag">OpenStack</span><span class="tag">VM Management</span><span class="tag">Packet Core</span></div>
       </div>
 
@@ -482,53 +727,53 @@
   </div>
 </section>
 
-<!-- ================= TRAINING SPOTLIGHT / ACHIEVEMENTS ================= -->
-<section class="ach-band" id="training">
+<!-- ================= ACHIEVEMENTS ================= -->
+<section class="ach-band" id="achievements">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">04 — KEY ACHIEVEMENTS</span>
+      <span class="eyebrow">06 — Key Achievements</span>
       <h2>Milestones across delivery and training</h2>
     </div>
     <div class="ach-grid">
       <div class="ach-card">
-        <span class="ic">🎓</span>
-        <h4>Large-Scale Training Delivery</h4>
-        <p>Trained 80 engineers across 5 batches in a 2-month RAN technical program for Jawwal, Duracom, and subcontractor teams in Palestine.</p>
+        <span class="ic">TRAINING</span>
+        <h4>80 Engineers Trained</h4>
+        <p>Five batches in a 2-month RAN technical program for Jawwal, Duracom, and subcontractor teams.</p>
       </div>
       <div class="ach-card">
-        <span class="ic">🚀</span>
-        <h4>FSO Operations Extension</h4>
-        <p>Extended Ericsson FSO operations into new areas based on high performance, expanding responsibilities in RAN and transmission.</p>
+        <span class="ic">TRANSMISSION</span>
+        <h4>First E-band Trial for Orange</h4>
+        <p>Led the first successful E-band + traditional link transmission trial, helping land a major contract.</p>
       </div>
       <div class="ach-card">
-        <span class="ic">⚡</span>
-        <h4>Project Completion Efficiency</h4>
-        <p>Finalized a project in half of allocated time, demonstrating strong project management and team coordination.</p>
+        <span class="ic">DELIVERY</span>
+        <h4>Delivered in Half the Time</h4>
+        <p>Closed a project in 50% of its allocated schedule through tight planning and team coordination.</p>
       </div>
       <div class="ach-card">
-        <span class="ic">🎯</span>
-        <h4>Customer Satisfaction</h4>
-        <p>Reduced customer complaints significantly by resolving PAT issues and implementing quality improvement processes.</p>
+        <span class="ic">GROWTH</span>
+        <h4>FSO Scope Extended</h4>
+        <p>Ericsson FSO operations extended into new RAN and transmission areas on the strength of delivery performance.</p>
       </div>
       <div class="ach-card">
-        <span class="ic">📡</span>
-        <h4>First Successful Transmission Trial</h4>
-        <p>Led the first successful transmission trial with E-band and traditional link for Orange, landing a major contract.</p>
+        <span class="ic">QUALITY</span>
+        <h4>Fewer Customer Complaints</h4>
+        <p>Significantly reduced complaints by resolving PAT issues and tightening acceptance quality.</p>
       </div>
       <div class="ach-card">
-        <span class="ic">👥</span>
-        <h4>Team Efficiency Improvement</h4>
-        <p>Increased team readiness for installation with FTR/FTP by introducing new Ericsson tools.</p>
+        <span class="ic">READINESS</span>
+        <h4>Faster Team Readiness</h4>
+        <p>Raised FTR/FTP installation readiness by introducing new Ericsson tools to field teams.</p>
       </div>
       <div class="ach-card">
-        <span class="ic">🌍</span>
-        <h4>Multi-Cultural Leadership</h4>
-        <p>Mentored and led diverse teams across 10 countries, adapting to different cultural environments.</p>
+        <span class="ic">CLOUD</span>
+        <h4>GCP PCA Cohort — #8 Silver</h4>
+        <p>Ranked 8th in the Silver League of the Google Cloud PCA cohort sponsored by Ericsson.</p>
       </div>
       <div class="ach-card">
-        <span class="ic">🏅</span>
-        <h4>Google Cloud PCA Cohort — #8, Silver League</h4>
-        <p>Ranked 8th in the Silver League of the Google Cloud PCA Cohort, sponsored by Ericsson and Mager.</p>
+        <span class="ic">CERTIFIED</span>
+        <h4>ACE + KCNA in 2026</h4>
+        <p>Earned Google Cloud Associate Cloud Engineer and Kubernetes &amp; Cloud Native Associate certifications.</p>
       </div>
     </div>
   </div>
@@ -538,67 +783,115 @@
 <section id="certs">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">05 — CERTIFICATIONS &amp; TRAINING</span>
-      <h2>Credentials in progress and complete</h2>
+      <span class="eyebrow">07 — Certifications</span>
+      <h2>Credentials</h2>
     </div>
-    <div class="cert-list">
-      <div class="cert-row">
-        <div><h4>Project Management Professional (PMP®)</h4><p>Professional certification in project management methodologies, leadership, and strategic business management.</p></div>
-        <span class="status done">Certified</span>
+    <div class="cert-cols">
+      <div>
+        <h3>Earned</h3>
+        <div class="cert-list">
+          <div class="cert-row">
+            <div><h4>Project Management Professional (PMP®)</h4><p>PMI — project, program, and stakeholder management.</p></div>
+            <span class="status done">Certified</span>
+          </div>
+          <div class="cert-row">
+            <div><h4>Google Cloud Associate Cloud Engineer</h4><p>Deploying, operating, and securing workloads on GCP.</p></div>
+            <span class="status done">Certified</span>
+          </div>
+          <div class="cert-row">
+            <div><h4>Kubernetes &amp; Cloud Native Associate (KCNA)</h4><p>CNCF / Linux Foundation — passed Sept 2026.</p></div>
+            <span class="status done">Certified</span>
+          </div>
+          <div class="cert-row">
+            <div><h4>Google Cloud PCA Cohort</h4><p>Ranked #8, Silver League — sponsored by Ericsson.</p></div>
+            <span class="status done">Completed</span>
+          </div>
+          <div class="cert-row">
+            <div><h4>HCNA — Routing &amp; Switching</h4><p>Huawei Certified Network Associate.</p></div>
+            <span class="status done">Certified</span>
+          </div>
+          <div class="cert-row">
+            <div><h4>OSHA 60-Hour Safety</h4><p>Occupational safety for construction and industrial sites.</p></div>
+            <span class="status done">Certified</span>
+          </div>
+          <div class="cert-row">
+            <div><h4>Ericsson Technical Certifications</h4><p>RAN installation, integration, and commissioning tracks.</p></div>
+            <span class="status done">Certified</span>
+          </div>
+        </div>
       </div>
-      <div class="cert-row">
-        <div><h4>O.S.H.A 60 Hour Certified</h4><p>Occupational safety and health standards for construction and industrial environments.</p></div>
-        <span class="status done">Certified</span>
-      </div>
-      <div class="cert-row">
-        <div><h4>HCNA — Routing and Switching</h4><p>Huawei Certified Network Associate: network fundamentals, routing, and switching.</p></div>
-        <span class="status done">Certified</span>
-      </div>
-      <div class="cert-row">
-        <div><h4>Google Cloud PCA Cohort</h4><p>Cohort ID PCA02-GETCERT/2026.04.23 — ranked #8, Silver League, sponsored by Ericsson &amp; Mager.</p></div>
-        <span class="status done">Completed</span>
-      </div>
-      <div class="cert-row">
-        <div><h4>Google Associate Cloud Engineer (ACE)</h4><p>Exam preparation underway with a structured study plan and voucher in hand.</p></div>
-        <span class="status progress">In Progress</span>
-      </div>
-      <div class="cert-row">
-        <div><h4>Certified Kubernetes Administrator (CKA)</h4><p>Cluster administration, installation, configuration, and troubleshooting.</p></div>
-        <span class="status progress">In Progress</span>
-      </div>
-      <div class="cert-row">
-        <div><h4>Linux Foundation Certified System Administrator (LFCS)</h4><p>Advanced Linux system administration.</p></div>
-        <span class="status progress">In Progress</span>
+      <div>
+        <h3>In progress</h3>
+        <div class="cert-list">
+          <div class="cert-row">
+            <div><h4>Certified Kubernetes Administrator (CKA)</h4><p>Next step after KCNA — cluster operations and troubleshooting.</p></div>
+            <span class="status progress">In Progress</span>
+          </div>
+          <div class="cert-row">
+            <div><h4>AWS Solutions Architect – Associate</h4><p>Multi-cloud architecture on AWS.</p></div>
+            <span class="status progress">In Progress</span>
+          </div>
+          <div class="cert-row">
+            <div><h4>Microsoft Azure Fundamentals (AZ-900)</h4><p>Core Azure services and governance.</p></div>
+            <span class="status progress">In Progress</span>
+          </div>
+          <div class="cert-row">
+            <div><h4>Linux Foundation Certified SysAdmin (LFCS)</h4><p>Advanced Linux system administration.</p></div>
+            <span class="status progress">In Progress</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- ================= CONTACT ================= -->
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">06 — CONTACT</span>
+      <span class="eyebrow">08 — Contact</span>
       <h2>Let's talk</h2>
+      <p>Open to Senior RAN, Technical Project Management, and Cloud/DevOps roles across the Gulf, Africa, and remote.</p>
     </div>
     <div class="contact-grid">
       <a class="contact-card" href="mailto:nour0gad@gmail.com">
-        <span class="eyebrow">EMAIL</span><div class="val">nour0gad@gmail.com</div>
+        <span class="eyebrow">Email</span><div class="val">nour0gad@gmail.com</div>
       </a>
       <a class="contact-card" href="tel:+201040056434">
-        <span class="eyebrow">PHONE</span><div class="val">+20 104 005 6434</div>
+        <span class="eyebrow">Phone</span><div class="val">+20 104 005 6434</div>
       </a>
       <a class="contact-card" href="https://linkedin.com/in/nour-gad" target="_blank" rel="noopener">
-        <span class="eyebrow">LINKEDIN</span><div class="val">linkedin.com/in/nour-gad</div>
+        <span class="eyebrow">LinkedIn</span><div class="val">linkedin.com/in/nour-gad</div>
       </a>
       <a class="contact-card" href="https://github.com/nourGAD" target="_blank" rel="noopener">
-        <span class="eyebrow">GITHUB</span><div class="val">github.com/nourGAD</div>
+        <span class="eyebrow">GitHub</span><div class="val">github.com/nourGAD</div>
       </a>
     </div>
   </div>
 </section>
 
-<footer>© 2026 Nour Gad — PMP® Certified DevOps &amp; Telecom Engineer</footer>
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Nour Gad · Cairo, Egypt</span>
+    <span>Built as code — <a href="https://github.com/nourGAD/portfolio" target="_blank" rel="noopener">view source</a></span>
+  </div>
+</footer>
 
+<script>
+  (function(){
+    var btn=document.querySelector('.menu-btn'), list=document.getElementById('navlinks');
+    btn.addEventListener('click',function(){
+      var open=list.classList.toggle('open');
+      btn.setAttribute('aria-expanded',open);
+      btn.textContent=open?'CLOSE':'MENU';
+    });
+    list.addEventListener('click',function(e){
+      if(e.target.tagName==='A'){list.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.textContent='MENU';}
+    });
+    document.getElementById('yr').textContent=new Date().getFullYear();
+  })();
+</script>
 </body>
 </html>

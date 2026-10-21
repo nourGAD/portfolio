@@ -1,0 +1,6 @@
+.git
+.github
+deploy/k8s
+deploy/terraform
+README.md
+Makefile
