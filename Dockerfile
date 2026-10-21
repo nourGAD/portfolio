@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.title="nourgad-portfolio" \
       org.opencontainers.image.authors="Nour Gad"
 
 COPY deploy/docker/nginx.conf /etc/nginx/conf.d/default.conf
-COPY --chown=101:101 index.html devops_portfolio.html /usr/share/nginx/html/
+COPY --chown=101:101 docs/index.html docs/devops_portfolio.html /usr/share/nginx/html/
 
 EXPOSE 8080
 

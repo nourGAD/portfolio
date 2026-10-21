@@ -10,7 +10,7 @@ The site itself is a single, dependency-free HTML page. This repository also tre
 
 | Path | What it does |
 |---|---|
-| `index.html` | The portfolio (served by GitHub Pages) |
+| `docs/index.html` | The portfolio (served by GitHub Pages from `/docs`) |
 | `Dockerfile` | Non-root NGINX image (`nginx-unprivileged`) on port 8080 with a health check |
 | `deploy/docker/nginx.conf` | Security headers (CSP, X-Frame-Options, …), gzip, `/healthz` endpoint |
 | `deploy/k8s/` | Kustomize set: restricted namespace, Deployment (probes, read-only root FS, dropped capabilities), Service, Ingress, HPA, PodDisruptionBudget |
