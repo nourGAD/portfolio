@@ -1,0 +1,8 @@
+{
+  "latest": "1.2.0",
+  "min": "1.0.0",
+  "notes": {
+    "en": "Arabic interface, multiple profiles, application tracker, LinkedIn import and optional photo.",
+    "ar": "واجهة عربي، أكتر من ملف شخصي، متابعة التقديمات، استيراد من LinkedIn، وصورة اختيارية."
+  }
+}
