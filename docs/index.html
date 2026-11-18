@@ -310,6 +310,12 @@
   .app-icon.i-car{background:linear-gradient(135deg,#F2A64B,#C9741A);}
   .app-icon.i-pdf{background:linear-gradient(135deg,#D9534F,#A8322E);}
   .app-icon.i-diet{background:linear-gradient(135deg,#3FA9A0,#1E7460);}
+  .app-icon.i-pharm{background:linear-gradient(135deg,#2BB3A3,#13756B);}
+  @media(min-width:861px){.app-wide{grid-column:1 / -1;}}
+  .app-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;}
+  @media(max-width:640px){.app-cols{grid-template-columns:1fr;}}
+  .app-cols ul{margin-bottom:12px;}
+  .app-cols + .tags{margin-top:4px;}
   .app h3{font-size:1.12rem;line-height:1.2;}
   .app h3 .ar{font-family:system-ui,'Segoe UI',Tahoma,sans-serif;font-weight:500;color:var(--ink-soft);font-size:0.98rem;margin-left:6px;}
   .app-sub{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--ink-soft);}
@@ -541,6 +547,8 @@
           <li><strong>Designed and delivered a 2-month RAN technical training program</strong> — 5 batches, 80 field engineers from Jawwal, Duracom, and subcontractor teams in Palestine — covering hardware, commissioning, MoShell/LMT/ZT, and troubleshooting.</li>
           <li>Served five years as <strong>Project Coordinator on Ericsson's Saudi Arabia project</strong>, coordinating field teams, partners, and delivery reporting.</li>
           <li><strong>Built internal automation tools</strong> — a RAN/TRM MOP Generator, an RBS site script generator, an ASP productivity dashboard, and field reference matrices — cutting manual documentation work for regional teams.</li>
+          <li>Delivered remote <strong>RAN installation &amp; commissioning training</strong> for a 25-site rollout in Lebanon, and prepared a 5-day 4G installation curriculum for new field teams in Palestine.</li>
+          <li>Authored the training material behind these programs — RAN fundamentals, baseband alarms with real MoShell logs, Zero Touch / LMT integration, NETCONF lab integration, and power-system installation decks.</li>
           <li>Provide remote training and live support for Jawwal's <strong>SRS (Smart Rollout Support)</strong> tool, coordinating between field, NDO, and Ericsson stakeholders.</li>
         </ul>
         <div class="tags">
@@ -613,7 +621,7 @@
         <h3>Build &amp; Automate</h3>
         <div class="tags">
           <span class="tag">JavaScript / HTML</span><span class="tag">React</span><span class="tag">React Native (Expo)</span>
-          <span class="tag">Flutter</span><span class="tag">Supabase</span><span class="tag">Python</span>
+          <span class="tag">Flutter</span><span class="tag">Supabase</span><span class="tag">Firebase</span><span class="tag">Python</span>
           <span class="tag">REST APIs</span><span class="tag">Git &amp; GitHub</span><span class="tag">Linux</span>
           <span class="tag">Excel (Advanced)</span><span class="tag">Power BI</span>
         </div>
@@ -636,7 +644,7 @@
     <div class="section-head">
       <span class="eyebrow">04 — Mobile Apps</span>
       <h2>Apps I design, build, and publish</h2>
-      <p>Independent products for Google Play — each one taken from idea and product spec through build, store listing, and testing. All are free, and work without AI in their first version.</p>
+      <p>Independent products for Android — each one taken from idea and product spec through build, backend, store listing, privacy policy, and release. Five apps so far, built on React Native, Flutter, Supabase, Firebase, and Google Cloud.</p>
     </div>
 
     <div class="app-grid">
@@ -647,16 +655,18 @@
             <h3>CV Match</h3>
             <span class="app-sub">Resume &amp; cover letter builder · Android</span>
           </div>
-          <span class="badge live">Google Play · Closed testing</span>
+          <span class="badge live">Google Play · v1.3</span>
         </div>
         <p>Tailors a CV and cover letter to a specific job. Enter the target role, upload a CV or follow a guided template, and get documents written for that posting.</p>
         <ul>
           <li>Job-match score and ATS check — with or without a target job</li>
           <li>Word and PDF export with selectable templates</li>
           <li>CVs in Arabic, English, and French</li>
-          <li>Release builds produced by a GitHub Actions pipeline</li>
+          <li>Job-application reminders, share a job post straight into the app, cover-letter tones, CV length check, and backup</li>
+          <li>In-app update notices; release builds produced by a GitHub Actions pipeline</li>
         </ul>
         <div class="tags"><span class="tag">React Native (Expo)</span><span class="tag">DOCX / PDF export</span><span class="tag">GitHub Actions</span></div>
+        <div class="links"><a href="cv-match/privacy.html">Privacy policy →</a></div>
       </article>
 
       <article class="app">
@@ -664,18 +674,19 @@
           <div class="app-icon i-car" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></div>
           <div>
             <h3>Qetaatak <span lang="ar" dir="rtl" class="ar">قطعتك</span></h3>
-            <span class="app-sub">Car spare-parts marketplace · Android</span>
+            <span class="app-sub">Multi-category marketplace · Android</span>
           </div>
           <span class="badge proto">Ready for Google Play</span>
         </div>
-        <p>A marketplace for new and used car spare parts: sellers list parts with photos, and anyone can browse and search for the part they need.</p>
+        <p>Started as a car spare-parts marketplace and grew into a multi-category one — cars and parts, phones, appliances, furniture, beauty, real estate, and more. Users post their own listings, and search also compares prices from other online stores.</p>
         <ul>
           <li>Open browsing; sign-in required only to contact a seller</li>
           <li>In-app chat, plus phone and WhatsApp contact</li>
           <li>"Notify me" alerts when a wanted part is posted</li>
-          <li>Fully bilingual interface — Arabic and English</li>
+          <li>Price comparison across external stores — sort by cheapest or most trusted</li>
+          <li>Featured listings as a revenue model; fully bilingual Arabic / English</li>
         </ul>
-        <div class="tags"><span class="tag">Flutter</span><span class="tag">Supabase</span><span class="tag">Transactional email</span><span class="tag">AR / EN</span></div>
+        <div class="tags"><span class="tag">Flutter</span><span class="tag">Supabase</span><span class="tag">Search aggregation</span><span class="tag">Transactional email</span><span class="tag">AR / EN</span></div>
         <div class="links"><a href="qetaatak/privacy.html">Privacy policy →</a></div>
       </article>
 
@@ -692,7 +703,8 @@
         <ul>
           <li>PDF reader</li>
           <li>Convert PDF to images, text, or ZIP</li>
-          <li>Offline-first: every tool works without a connection</li>
+          <li>Offline file summaries and a dashboard for Excel, PDF, and Word files</li>
+          <li>Offline-first: every tool works without a connection, and the app can be set as the default PDF viewer</li>
         </ul>
         <div class="tags"><span class="tag">React Native (Expo)</span><span class="tag">Offline-first</span><span class="tag">GitHub Actions</span></div>
       </article>
@@ -704,7 +716,7 @@
             <h3>Sahtein <span lang="ar" dir="rtl" class="ar">صحتين</span></h3>
             <span class="app-sub">Calorie &amp; diet tracker · Android</span>
           </div>
-          <span class="badge internal">In development</span>
+          <span class="badge proto">Google Play Console</span>
         </div>
         <p>A calorie and meal tracker built around the complaints people have with existing diet apps: simple logging, honest targets, and reminders that fit the day.</p>
         <ul>
@@ -712,8 +724,36 @@
           <li>Meal reminders at times the user sets</li>
           <li>Daily and weekly history with a gamified interface</li>
           <li>Gym and home exercise library organised by muscle</li>
+          <li>v0.2: AI meal logging on a Google Cloud backend, with per-user daily limits; Arabic and English</li>
         </ul>
-        <div class="tags"><span class="tag">Android</span><span class="tag">Product spec first</span><span class="tag">Formula-based v1</span></div>
+        <div class="tags"><span class="tag">Android</span><span class="tag">Google Cloud</span><span class="tag">AI logging</span><span class="tag">AR / EN</span></div>
+        <div class="links"><a href="sahtein/privacy.html">Privacy policy →</a></div>
+      </article>
+      <article class="app app-wide">
+        <div class="app-head">
+          <div class="app-icon i-pharm" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg></div>
+          <div>
+            <h3>Pharmacy Ordering App</h3>
+            <span class="app-sub">Built for a local pharmacy in Cairo · Android + web</span>
+          </div>
+          <span class="badge live">Pilot · APK &amp; web</span>
+        </div>
+        <p>A complete ordering system for a neighbourhood pharmacy with delivery: customers order from their phone or the web, and the pharmacist manages stock, orders, and customers from an admin app.</p>
+        <div class="app-cols">
+          <ul>
+            <li>Separate customer and admin logins</li>
+            <li>One-tap reorder of past orders; optional prescription photo</li>
+            <li>Order status tracking and order chat with the pharmacy</li>
+            <li>Medicine reminders with daily dose times and "taken" check-offs</li>
+          </ul>
+          <ul>
+            <li>Admin imports products and prices from Excel, with stock and discounts</li>
+            <li>Push notifications to the admin for every new order</li>
+            <li>Requests for unavailable items, with price and availability replies</li>
+            <li>Customer list, direct messages, and broadcast offers</li>
+          </ul>
+        </div>
+        <div class="tags"><span class="tag">Supabase</span><span class="tag">Firebase Cloud Messaging</span><span class="tag">Excel import</span><span class="tag">AR / EN</span></div>
       </article>
     </div>
   </div>
@@ -981,8 +1021,12 @@
           <p>University coursework on how processors, memory, and systems work underneath the software.</p>
         </div>
         <div class="path-item">
+          <h4>Python Programming</h4>
+          <p>Academic Python course — objects, graphics, and core programming fundamentals.</p>
+        </div>
+        <div class="path-item">
           <h4>Learning by Building</h4>
-          <p>Shipping my own apps end to end — React Native, Flutter, Supabase, and GitHub Actions release pipelines.</p>
+          <p>Shipping five apps end to end — React Native, Flutter, Supabase, Firebase, Google Cloud, and GitHub Actions release pipelines.</p>
         </div>
       </div>
 
